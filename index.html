@@ -3,247 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>露蕾希 LURESH｜高纖莓果飲 High Fiber Berry Drink</title>
-<meta name="description" content="露蕾希高纖莓果飲：特選專利植萃 × 多重膳食纖維，專為外食族、忙碌上班族設計的輕體代謝飲品。每日 2 包，擺脫囤積感，喝出輕盈順暢力。台灣製造，通過多項 SGS 認證。">
+<title>露蕾希 LURESH｜高纖莓果飲</title>
+<meta name="description" content="擺脫囤積感！每日喝出輕盈順暢力。露蕾希高纖莓果飲，特選專利植萃 × 多重膳食纖維。低卡負擔、蛋奶素可食、專利專屬配方。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --rose:#B93A5B;
-    --rose-deep:#8E2743;
-    --rose-soft:#E48AA3;
-    --blush:#F7E7EC;
-    --cream:#FCF8F5;
-    --paper:#FFFFFF;
-    --ink:#2B2224;
-    --ink-soft:#6B5A5F;
-    --line:#E9D9DE;
-    --serif:"Cormorant Garamond","Noto Serif TC",serif;
-    --tc-serif:"Noto Serif TC","Cormorant Garamond",serif;
-    --sans:"Noto Sans TC",system-ui,sans-serif;
-    --max:1180px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:var(--sans);color:var(--ink);background:var(--paper);font-weight:300;line-height:1.85;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
-  img{display:block;max-width:100%}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
-  @media(max-width:640px){.wrap{padding:0 20px}}
-
-  /* ===== announcement ===== */
-  .bar{background:var(--rose);color:#fff;text-align:center;font-size:12px;letter-spacing:.28em;padding:9px 16px;font-weight:400}
-  .bar span{opacity:.75;margin:0 10px}
-
-  /* ===== header ===== */
-  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:96px}
-  .nav ul{display:flex;gap:30px;list-style:none;font-size:12px;letter-spacing:.22em;font-weight:400}
-  .nav ul a{position:relative;padding:4px 0}
-  .nav ul a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--rose);transition:right .35s cubic-bezier(.2,.7,.2,1)}
-  .nav ul a:hover::after{right:0}
-  .logo{border:1.5px solid var(--ink);padding:8px 22px 6px;text-align:center;line-height:1.05}
-  .logo .en{font-family:var(--serif);font-style:italic;font-weight:500;font-size:26px;letter-spacing:.14em}
-  .logo .zh{font-family:var(--tc-serif);font-size:12px;letter-spacing:.7em;margin-left:.7em;margin-top:3px;font-weight:500}
-  .tools{display:flex;justify-content:flex-end;gap:22px;align-items:center;font-size:12px;letter-spacing:.18em;font-weight:400}
-  .tools svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.4}
-  .burger{display:none;background:none;border:0;cursor:pointer}
-  @media(max-width:900px){
-    .nav{grid-template-columns:auto 1fr auto;height:76px}
-    .nav ul{display:none}
-    .burger{display:block}
-    .tools .txt{display:none}
-    .logo{justify-self:center}
-    .logo .en{font-size:22px}
-  }
-  .mobile-menu{display:none;border-top:1px solid var(--line);background:#fff}
-  .mobile-menu.open{display:block}
-  .mobile-menu a{display:block;padding:14px 24px;font-size:13px;letter-spacing:.2em;border-bottom:1px solid var(--line)}
-
-  /* ===== hero ===== */
-  .hero{position:relative;overflow:hidden;background:var(--cream);display:grid;grid-template-columns:7fr 5fr;min-height:640px;max-height:86vh}
-  .hero-img{width:100%;height:100%;object-fit:cover;object-position:62% center;animation:heroZoom 2.4s cubic-bezier(.2,.7,.2,1) both}
-  .hero-copy{display:flex;align-items:center;padding:60px 64px 60px 56px;position:relative}
-  .hero-copy::before{content:"";position:absolute;left:0;top:10%;bottom:10%;width:1px;background:linear-gradient(transparent,var(--rose-soft),transparent)}
-  .hero-card{max-width:520px;animation:rise 1.1s .2s cubic-bezier(.2,.7,.2,1) both}
-  @keyframes heroZoom{from{transform:scale(1.06)}to{transform:none}}
-  .eyebrow{font-size:12px;letter-spacing:.32em;font-weight:400;color:var(--rose);text-transform:uppercase}
-  .hero h1{font-family:var(--tc-serif);font-weight:600;font-size:clamp(30px,4.2vw,52px);line-height:1.25;letter-spacing:.06em;margin:12px 0 8px}
-  .hero h1 em{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--rose);display:block;font-size:.55em;letter-spacing:.2em;margin-top:6px}
-  .hero p{font-size:15px;color:var(--ink-soft);margin-bottom:26px}
-  .btn{display:inline-block;background:var(--ink);color:#fff;font-size:12px;letter-spacing:.3em;padding:15px 34px 14px;border:1px solid var(--ink);transition:background .3s,color .3s,transform .3s}
-  .btn:hover{background:var(--rose);border-color:var(--rose);transform:translateY(-2px)}
-  .btn.ghost{background:transparent;color:var(--ink)}
-  .btn.ghost:hover{background:var(--ink);color:#fff}
-  .socials{position:absolute;left:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:18px;color:var(--ink);z-index:2;background:rgba(255,255,255,.7);padding:14px 10px;backdrop-filter:blur(4px)}
-  .socials svg{width:16px;height:16px;fill:currentColor}
-  @media(max-width:900px){
-    .hero{grid-template-columns:1fr;min-height:0;max-height:none}
-    .hero-img{height:58vw;min-height:280px;object-position:center}
-    .hero-copy{padding:40px 24px 52px}
-    .hero-copy::before{display:none}
-    .socials{display:none}
-  }
-  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-
-  /* ===== section titles ===== */
-  section{padding:104px 0}
-  @media(max-width:900px){section{padding:72px 0}}
-  .kicker{text-align:center;font-size:12px;letter-spacing:.34em;font-weight:400;color:var(--ink);text-transform:uppercase}
-  .kicker::after{content:"";display:block;width:36px;height:1px;background:var(--rose);margin:18px auto 0}
-  h2{font-family:var(--tc-serif);font-weight:600;font-size:clamp(26px,3vw,38px);letter-spacing:.12em;line-height:1.3}
-  h2 .en{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:.5em;letter-spacing:.24em;color:var(--rose);margin-bottom:8px}
-
-  /* ===== split feature (FRAIS style) ===== */
-  .split{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:0}
-  .split + .split{margin-top:72px}
-  .split.flip .media{order:2}
-  .split .media{position:relative}
-  .split .media img{width:100%;aspect-ratio:4/3;object-fit:cover}
-  .split .media::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:1px solid var(--rose-soft);z-index:-1;opacity:.6}
-  .split.flip .media::before{inset:18px 18px -18px -18px}
-  .split .copy{padding:0 0 0 72px}
-  .split.flip .copy{padding:0 72px 0 0}
-  .split h2{margin:16px 0 22px}
-  .split p{font-size:15px;color:var(--ink-soft);margin-bottom:14px}
-  .split .btn{margin-top:14px}
-  .badges{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 6px}
-  .badge{border:1px solid var(--rose);color:var(--rose);border-radius:999px;font-size:12px;letter-spacing:.14em;padding:6px 16px;font-weight:400}
-  .badge b{font-weight:500;margin-left:4px}
-  @media(max-width:900px){
-    .split{grid-template-columns:1fr;gap:34px}
-    .split.flip .media{order:0}
-    .split .copy,.split.flip .copy{padding:0}
-    .split .media::before,.split.flip .media::before{inset:12px -12px -12px 12px}
-  }
-
-  /* ===== scenario checklist ===== */
-  .scene{background:var(--cream);position:relative;overflow:hidden}
-  .scene::before{content:"";position:absolute;inset:0;background:
-    radial-gradient(circle at 12% 20%,rgba(228,138,163,.18),transparent 32%),
-    radial-gradient(circle at 88% 80%,rgba(185,58,91,.12),transparent 34%);pointer-events:none}
-  .scene .wrap{position:relative}
-  .scene h2{text-align:center;margin:18px 0 12px}
-  .scene .lead{text-align:center;color:var(--ink-soft);font-size:15px;max-width:560px;margin:0 auto 52px}
-  .qs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-  .q{background:#fff;border:1px solid var(--line);padding:34px 26px 30px;position:relative;transition:transform .35s,box-shadow .35s}
-  .q:hover{transform:translateY(-6px);box-shadow:0 22px 40px -24px rgba(142,39,67,.35)}
-  .q .n{font-family:var(--serif);font-style:italic;font-size:44px;line-height:1;color:var(--rose-soft);margin-bottom:14px}
-  .q p{font-family:var(--tc-serif);font-size:17px;font-weight:500;line-height:1.6;letter-spacing:.04em}
-  .q p span{display:block;color:var(--rose);font-size:13px;font-family:var(--sans);font-weight:400;letter-spacing:.1em;margin-top:8px}
-  .scene .cta{text-align:center;margin-top:44px;font-family:var(--tc-serif);font-size:20px;letter-spacing:.14em;color:var(--rose-deep)}
-  @media(max-width:900px){.qs{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:520px){.qs{grid-template-columns:1fr}}
-
-  /* ===== ingredient trio ===== */
-  .trio-head{text-align:center;margin-bottom:56px}
-  .trio-head h2{margin-top:18px}
-  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-  .card{border:1px solid var(--line);background:#fff;padding:0 0 32px;position:relative;overflow:hidden;transition:transform .35s,box-shadow .35s}
-  .card:hover{transform:translateY(-6px);box-shadow:0 24px 44px -26px rgba(142,39,67,.4)}
-  .card .tag{position:absolute;top:16px;left:16px;background:var(--rose);color:#fff;font-size:10px;letter-spacing:.24em;padding:4px 10px;font-weight:500;z-index:1}
-  .card .top{background:linear-gradient(160deg,var(--blush),#fff 70%);padding:52px 28px 26px}
-  .card .num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.3em;color:var(--rose);font-weight:500}
-  .card h3{font-family:var(--tc-serif);font-size:24px;font-weight:600;letter-spacing:.08em;margin-top:6px}
-  .card .body{padding:22px 28px 0}
-  .card .formula{display:flex;flex-wrap:wrap;gap:6px 0;align-items:center;font-size:13px;font-weight:500;letter-spacing:.06em;margin-bottom:14px}
-  .card .formula i{font-style:normal;color:var(--rose);padding:0 8px;font-family:var(--serif);font-size:16px}
-  .card .formula span{background:var(--blush);padding:3px 10px;border-radius:3px}
-  .card p{font-size:14px;color:var(--ink-soft)}
-  .card .hi{display:inline-block;color:var(--rose-deep);font-weight:500;margin-top:10px;font-size:14px}
-  @media(max-width:900px){.trio{grid-template-columns:1fr}}
-
-  /* ===== 9 ingredients ===== */
-  .nine{background:var(--ink);color:#fff}
-  .nine .kicker{color:#fff}
-  .nine h2{text-align:center;color:#fff;margin:18px 0 56px}
-  .nine h2 .en{color:var(--rose-soft)}
-  .grid9{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.14);border-left:1px solid rgba(255,255,255,.14)}
-  .grid9>div{padding:28px 26px;border-right:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);display:flex;gap:16px;align-items:baseline;transition:background .3s}
-  .grid9>div:hover{background:rgba(185,58,91,.22)}
-  .grid9 em{font-family:var(--serif);font-style:italic;color:var(--rose-soft);font-size:15px;letter-spacing:.1em;min-width:28px}
-  .grid9 strong{font-family:var(--tc-serif);font-weight:500;font-size:17px;letter-spacing:.06em}
-  .grid9 small{display:block;font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.05em;margin-top:2px}
-  .nine .foot{text-align:center;margin-top:40px;font-size:12px;letter-spacing:.3em;color:rgba(255,255,255,.7)}
-  @media(max-width:700px){.grid9{grid-template-columns:1fr}}
-
-  /* ===== how-to ===== */
-  .howto{background:var(--cream)}
-  .howto .head{text-align:center;margin-bottom:56px}
-  .howto .head h2{margin-top:18px}
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:s}
-  .step{background:#fff;border:1px solid var(--line);padding:40px 26px 32px;text-align:center;position:relative}
-  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--rose);color:var(--rose);font-family:var(--serif);font-size:20px;display:grid;place-items:center}
-  .step svg{width:60px;height:60px;stroke:var(--rose);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 18px}
-  .step h4{font-family:var(--tc-serif);font-size:18px;font-weight:600;letter-spacing:.08em;line-height:1.5}
-  .step p{font-size:13px;color:var(--ink-soft);margin-top:8px}
-  .rules{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;margin-top:26px}
-  .rule{background:#fff;border:1px solid var(--line);padding:38px 40px}
-  .rule h4{font-family:var(--tc-serif);font-size:20px;letter-spacing:.14em;font-weight:600;color:var(--rose-deep);margin-bottom:18px;display:flex;align-items:center;gap:14px}
-  .rule h4::after{content:"";flex:1;height:1px;background:var(--line)}
-  .rule ol{padding-left:1.4em;font-size:15px}
-  .rule ol li{margin-bottom:8px}
-  .rule ol li b{font-weight:500;color:var(--ink)}
-  .rule p{font-size:15px;color:var(--ink-soft);margin-bottom:12px}
-  .warn{background:var(--rose);color:#fff;padding:22px 28px;margin-top:22px;font-size:14px;line-height:1.7;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
-  .warn b{font-family:var(--tc-serif);font-size:18px;letter-spacing:.16em;font-weight:600;white-space:nowrap}
-  @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}.rules{grid-template-columns:1fr}.rule{padding:30px 24px}}
-  @media(max-width:520px){.steps{grid-template-columns:1fr;gap:34px}.warn{grid-template-columns:1fr}}
-
-  /* ===== story band ===== */
-  .story{padding:0}
-  .story .band{position:relative;min-height:560px;display:grid;grid-template-columns:1fr 1fr}
-  .story .band img{width:100%;height:100%;object-fit:cover;object-position:right center;min-height:420px}
-  .story .txt{display:flex;flex-direction:column;justify-content:center;padding:80px 12% 80px 80px;background:var(--blush)}
-  .story .txt h2{margin:16px 0 22px}
-  .story .txt p{font-size:15px;color:var(--ink-soft);margin-bottom:12px}
-  .story .txt .sig{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--rose);margin-top:22px;letter-spacing:.06em}
-  @media(max-width:900px){.story .band{grid-template-columns:1fr}.story .txt{padding:56px 24px}}
-
-  /* ===== poster "journal" ===== */
-  .journal .head{text-align:center;margin-bottom:56px}
-  .journal .head h2{margin-top:18px}
-  .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-  .post{cursor:pointer;background:none;border:0;text-align:left;font:inherit;color:inherit;padding:0}
-  .post .thumb{overflow:hidden;border:1px solid var(--line);background:var(--cream);aspect-ratio:3/4}
-  .post .thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-  .post:hover .thumb img{transform:scale(1.04)}
-  .post h4{font-family:var(--tc-serif);font-size:19px;font-weight:600;letter-spacing:.08em;margin:20px 0 6px}
-  .post p{font-size:14px;color:var(--ink-soft)}
-  .post .more{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.24em;border-bottom:1px solid var(--ink);padding-bottom:2px}
-  @media(max-width:900px){.posts{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
-
-  /* lightbox */
-  .lb{position:fixed;inset:0;background:rgba(43,34,36,.86);display:none;place-items:center;z-index:100;padding:24px}
-  .lb.open{display:grid}
-  .lb img{max-height:92vh;max-width:min(92vw,720px);box-shadow:0 30px 80px rgba(0,0,0,.5)}
-  .lb button{position:absolute;top:18px;right:22px;background:none;border:0;color:#fff;font-size:34px;cursor:pointer;line-height:1}
-
-  /* ===== contact / cta ===== */
-  .contact{text-align:center;background:var(--cream)}
-  .contact h2{margin:18px auto 14px}
-  .contact p{color:var(--ink-soft);font-size:15px;max-width:520px;margin:0 auto 30px}
-  .contact .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-
-  /* ===== footer ===== */
-  footer{background:#fff;border-top:1px solid var(--line);padding:64px 0 28px}
-  .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;font-size:13px}
-  .fgrid h5{font-size:11px;letter-spacing:.3em;font-weight:500;margin-bottom:16px;color:var(--rose)}
-  .fgrid ul{list-style:none}
-  .fgrid li{margin-bottom:8px}
-  .fgrid li a:hover{color:var(--rose)}
-  .fbrand .logo{display:inline-block;margin-bottom:16px}
-  .fbrand p{color:var(--ink-soft);font-size:13px;max-width:320px}
-  .copy-line{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;letter-spacing:.18em;color:var(--ink-soft)}
-  @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.fgrid{grid-template-columns:1fr}}
-
-  /* reveal on scroll */
-  .rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-  .rv.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero-card{animation:none}}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -255,13 +20,12 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
     <ul>
-      <li><a href="#product">產品</a></li>
-      <li><a href="#scene">適合誰</a></li>
-      <li><a href="#ingredients">成分</a></li>
-      <li><a href="#howto">食用方法</a></li>
-      <li><a href="#journal">須知</a></li>
+      <li><a href="index.html" aria-current="page">首頁</a></li>
+      <li><a href="scene.html">適合誰・成分</a></li>
+      <li><a href="about.html">產品介紹</a></li>
+      <li><a href="guide.html">食用方法・須知</a></li>
     </ul>
-    <a class="logo" href="#top" aria-label="露蕾希 LURESH 首頁">
+    <a class="logo" href="index.html" aria-label="露蕾希 LURESH 首頁">
       <div class="en">LURESH</div>
       <div class="zh">露蕾希</div>
     </a>
@@ -272,243 +36,108 @@
     </div>
   </div>
   <nav class="mobile-menu" id="mobileMenu">
-    <a href="#product" onclick="closeMenu()">產品</a>
-    <a href="#scene" onclick="closeMenu()">適合誰</a>
-    <a href="#ingredients" onclick="closeMenu()">成分</a>
-    <a href="#howto" onclick="closeMenu()">食用方法</a>
-    <a href="#journal" onclick="closeMenu()">須知</a>
-    <a href="#contact" onclick="closeMenu()">聯絡我們</a>
+    <a href="index.html" aria-current="page">首頁</a>
+    <a href="scene.html">適合誰・成分</a>
+    <a href="about.html">產品介紹</a>
+    <a href="guide.html">食用方法・須知</a>
+    <a href="#contact">聯絡我們</a>
   </nav>
 </header>
 
-<main id="top">
+<main>
 
-  <!-- HERO -->
+  <!-- P.1 hero -->
   <div class="hero">
     <img class="hero-img" src="images/hero-product.jpg" alt="露蕾希高纖莓果飲產品與莓果飲品情境照" fetchpriority="high">
-    <div class="socials" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM21 8.1c-.1-1.6-.4-3-1.6-4.2S16.8 2.4 15.2 2.3C13.6 2.2 10.4 2.2 8.8 2.3 7.2 2.4 5.8 2.7 4.6 3.9S3.1 6.5 3 8.1c-.1 1.6-.1 6.2 0 7.8.1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.6.1 6.2.1 7.8 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.6.1-6.2 0-7.8zm-2.2 9.6a3.3 3.3 0 0 1-1.8 1.8c-1.3.5-4.3.4-5.7.4s-4.4.1-5.7-.4a3.3 3.3 0 0 1-1.8-1.8C3.3 16.4 3.4 13.4 3.4 12s-.1-4.4.4-5.7A3.3 3.3 0 0 1 5.6 4.5c1.3-.5 4.3-.4 5.7-.4s4.4-.1 5.7.4a3.3 3.3 0 0 1 1.8 1.8c.5 1.3.4 4.3.4 5.7s.1 4.4-.4 5.7z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-2.4 8.3-2.2 3.1-2.2-3.1H9.7l3 4.2-3.2 4.5h2.4l2.4-3.4 2.4 3.4h2.4l-3.2-4.5 3-4.2h-2.3z"/></svg>
-    </div>
     <div class="hero-copy">
-      <div>
-        <div class="hero-card">
-          <div class="eyebrow">High Fiber Berry Drink · 特選專利植萃 × 多重膳食纖維</div>
-          <h1>擺脫囤積感！<br>每日喝出輕盈順暢力<em>A lighter, happier you</em></h1>
-          <p>露蕾希高纖莓果飲，專為外食族、忙碌上班族設計的輕體代謝飲品。每日 2 包，幫你輕鬆找回順暢快感與青春活力。</p>
-          <a class="btn" href="#product">立即了解</a>
-        </div>
+      <div class="hero-card">
+        <div class="eyebrow">High Fiber Berry Drink</div>
+        <h1>擺脫囤積感！<br>每日喝出輕盈順暢力<em>A lighter, happier you</em></h1>
+        <div class="sub">露蕾希高纖莓果飲</div>
+        <p>特選專利植萃 × 多重膳食纖維</p>
+        <a class="btn" href="about.html">認識產品</a>
       </div>
     </div>
   </div>
 
-  <!-- PRODUCT SPLITS -->
-  <section id="product">
-    <div class="wrap">
-      <div class="split rv">
-        <div class="media"><img src="images/lifestyle-bed.jpg" alt="露蕾希高纖莓果飲於床邊早晨情境，更輕盈的自己從一杯開始" loading="lazy"></div>
-        <div class="copy">
-          <div class="eyebrow">全效輕體代謝補給</div>
-          <h2><span class="en">Luresh High Fiber</span>露蕾希高纖莓果飲</h2>
-          <p>專為外食族、忙碌上班族設計的輕體代謝飲品。結合多重纖維、強效酵素，與阻斷澱粉、燃燒代謝專利萃取。</p>
-          <p>每日 2 包，幫你輕鬆找回順暢快感與青春活力。更輕盈的自己，從一杯開始。</p>
-          <div class="badges">
-            <span class="badge">低卡負擔<b>每份僅 34.4 大卡</b></span>
-            <span class="badge">蛋奶素可食</span>
-            <span class="badge">專利專屬配方</span>
-          </div>
-          <a class="btn" href="#ingredients">看看成分</a>
-        </div>
-      </div>
-
-      <div class="split flip rv">
-        <div class="media"><img src="images/ingredients-banner.jpg" alt="嚴選天然植萃：綜合蔬果酵素、魔芋纖維、藤黃果萃取物、洋車前子多酚、柑橘類黃酮與瓜拿納複合物" loading="lazy"></div>
-        <div class="copy">
-          <div class="eyebrow">Fullness · Cleanse</div>
-          <h2><span class="en">Two ways to feel light</span>高纖飽足 × 酵素淨化</h2>
-          <p><strong style="font-weight:500;color:var(--ink)">高纖飽足，告別小腹卡關。</strong>富含洋車前子殼粉與魔芋纖維，提供持久飽足感，有效減少餐間零食與大餐慾望，從源頭管理。</p>
-          <p><strong style="font-weight:500;color:var(--ink)">酵素淨化，享受順暢輕盈。</strong>精心添加綜合蔬果酵素與決明子萃取，幫助維持消化道機能、改變細菌叢生態，讓排便輕鬆不費力，天天淨化身體。</p>
-          <a class="btn ghost" href="#howto">怎麼喝</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCENARIO -->
-  <section id="scene" class="scene">
-    <div class="wrap">
-      <div class="kicker">Is this you?</div>
-      <h2 style="text-align:center"><span class="en">情境場景</span>你也有這些困擾嗎？</h2>
-      <p class="lead">如果以下有一項說中了你的日常，露蕾希高纖莓果飲就是為你準備的。</p>
-      <div class="qs">
-        <div class="q rv"><div class="n">01</div><p>經常外食，蔬菜水果攝取不足？<span>纖維缺口</span></p></div>
-        <div class="q rv" style="transition-delay:.1s"><div class="n">02</div><p>喜歡吃甜食、手搖飲料、澱粉炸物？<span>澱粉甜食控</span></p></div>
-        <div class="q rv" style="transition-delay:.2s"><div class="n">03</div><p>蹲廁所很久，卡卡不順暢？<span>順暢卡關</span></p></div>
-        <div class="q rv" style="transition-delay:.3s"><div class="n">04</div><p>容易有囤積感、體態沉重？<span>囤積沉重</span></p></div>
-      </div>
-      <p class="cta rv">體態救星 · 澱粉殺手 · 加強代謝 · 抑制食慾</p>
-    </div>
-  </section>
-
-  <!-- INGREDIENT TRIO -->
-  <section id="ingredients">
+  <!-- P.1 three badges -->
+  <section>
     <div class="wrap">
       <div class="trio-head">
-        <div class="kicker">Ingredients</div>
-        <h2><span class="en">成分告白</span>三大機能組合，一杯到位</h2>
+        <div class="kicker">Why Luresh</div>
+        <h2><span class="en">Three promises</span>低卡負擔・蛋奶素可食・專利專屬配方</h2>
       </div>
-      <div class="trio">
-        <article class="card rv">
-          <span class="tag">FIBER</span>
-          <div class="top"><div class="num">No. 01</div><h3>順暢神隊友</h3></div>
-          <div class="body">
-            <div class="formula"><span>綜合蔬果酵素</span><i>+</i><span>洋車前子殼粉</span><i>+</i><span>魔芋纖維</span></div>
-            <p>多重膳食纖維提供持久飽足感，酵素幫助維持消化道機能，讓排便輕鬆不費力。</p>
-          </div>
-        </article>
-        <article class="card rv" style="transition-delay:.12s">
-          <span class="tag">STARCH BLOCK</span>
-          <div class="top"><div class="num">No. 02</div><h3>天然閃澱救星</h3></div>
-          <div class="body">
-            <div class="formula"><span>白腎豆萃取</span><i>+</i><span>藤黃果萃取物</span></div>
-            <p>澱粉甜食控必備！三餐外食代謝。</p>
-            <div class="formula" style="margin-top:12px"><span>柑橘黃酮</span><i>+</i><span>瓜拿納複合物</span><i>+</i><span>非洲芒果種子萃取物</span></div>
-            <p>促進代謝，減少負擔。</p>
-          </div>
-        </article>
-        <article class="card rv" style="transition-delay:.24s">
-          <span class="tag">METABOLISM</span>
-          <div class="top"><div class="num">No. 03</div><h3>代謝順暢加碼</h3></div>
-          <div class="body">
-            <div class="formula"><span>大麥萃取物</span><i>+</i><span>決明子萃取物</span></div>
-            <p>促進新陳代謝，調節身體機能。</p>
-          </div>
-        </article>
+      <div class="pillars">
+        <div class="pillar rv">
+          <div class="ring"><svg viewBox="0 0 24 24"><path d="M12 3c-3 4-6 6-6 10a6 6 0 0 0 12 0c0-4-3-6-6-10z"/><path d="M12 13v5"/></svg></div>
+          <h3>低卡負擔</h3>
+          <p><b>34.4</b>每份僅 34.4 大卡</p>
+        </div>
+        <div class="pillar rv" style="transition-delay:.12s">
+          <div class="ring"><svg viewBox="0 0 24 24"><path d="M5 12c0-4 3-7 7-7s7 3 7 7-3 7-7 7"/><path d="M5 12c0 4 3 7 7 7"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>蛋奶素可食</h3>
+          <p>素食者也能安心每日飲用</p>
+        </div>
+        <div class="pillar rv" style="transition-delay:.24s">
+          <div class="ring"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9L9.5 8z"/></svg></div>
+          <h3>專利專屬配方</h3>
+          <p>特選專利植萃，露蕾希獨家配比</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 9 INGREDIENTS -->
-  <section class="nine">
+  <!-- P.1 ③ 代謝順暢加碼 -->
+  <section class="scene">
     <div class="wrap">
-      <div class="kicker">Formula</div>
-      <h2><span class="en">Nine botanicals</span>嚴選天然植萃，補充美好能量</h2>
-      <div class="grid9 rv">
-        <div><em>01</em><div><strong>綜合蔬果酵素</strong><small>多種蔬果精華，補充日常營養</small></div></div>
-        <div><em>02</em><div><strong>魔芋纖維</strong><small>天然膳食纖維，增加飽足感</small></div></div>
-        <div><em>03</em><div><strong>大麥萃取物</strong><small>促進新陳代謝</small></div></div>
-        <div><em>04</em><div><strong>非洲芒果種子萃取物</strong><small>促進代謝，減少負擔</small></div></div>
-        <div><em>05</em><div><strong>藤黃果萃取物</strong><small>植萃精華，幫助維持健康</small></div></div>
-        <div><em>06</em><div><strong>白腎豆萃取物</strong><small>澱粉甜食控必備</small></div></div>
-        <div><em>07</em><div><strong>洋車前子多酚</strong><small>天然植萃纖維，促進腸道蠕動</small></div></div>
-        <div><em>08</em><div><strong>柑橘類黃酮與瓜拿納複合物</strong><small>甜橙、血橙、葡萄柚及瓜拿納萃取物</small></div></div>
-        <div><em>09</em><div><strong>決明子萃取物</strong><small>調節身體機能</small></div></div>
+      <div class="trio-head">
+        <div class="kicker">Bonus</div>
+        <h2><span class="en">No. 03</span>代謝順暢加碼</h2>
       </div>
-      <p class="foot">台灣製造 · 通過多項 SGS 認證 · 自然美的更加放心</p>
+      <article class="card wide rv">
+        <span class="tag">METABOLISM</span>
+        <div class="top"><div class="num">No. 03</div><h3>代謝順暢加碼</h3></div>
+        <div class="body">
+          <div class="formula"><span>大麥萃取物</span><i>+</i><span>決明子萃取物</span></div>
+          <p>促進新陳代謝，調節身體機能。搭配「順暢神隊友」與「天然閃澱救星」，三大機能組合一杯到位。</p>
+          <p style="margin-top:14px"><a class="more" href="scene.html" style="font-size:12px;letter-spacing:.24em;border-bottom:1px solid var(--ink);padding-bottom:2px;color:var(--ink)">看 ①② 成分告白</a></p>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- HOW TO -->
-  <section id="howto" class="howto">
-    <div class="wrap">
-      <div class="head">
-        <div class="kicker">How to drink</div>
-        <h2><span class="en">Instructions for consumption</span>食用方法說明</h2>
-      </div>
-      <div class="steps">
-        <div class="step rv">
-          <svg viewBox="0 0 64 64"><path d="M18 20h28l-3 32H21z"/><path d="M14 20h36"/><path d="M26 12c0-3 12-3 12 0"/><path d="M24 32c6 3 10 3 16 0"/></svg>
-          <h4>準備 240cc<br>常溫或冷水</h4><p>嚴禁溫熱水</p>
-        </div>
-        <div class="step rv" style="transition-delay:.1s">
-          <svg viewBox="0 0 64 64"><path d="M18 24h28l-3 28H21z"/><path d="M14 24h36"/><path d="M40 6l10 8-6 10-10-8z"/><path d="M34 22v2M37 20v2M31 24v2"/></svg>
-          <h4>一次兩包<br>一天一次</h4><p>倒入杯中</p>
-        </div>
-        <div class="step rv" style="transition-delay:.2s">
-          <svg viewBox="0 0 64 64"><path d="M22 14h20v6H22z"/><path d="M24 20h16l-2 32H26z"/><path d="M10 34c6-4 38-4 44 0"/><path d="M12 34l-3 3M52 34l3-3"/></svg>
-          <h4>蓋上搖杯<br>搖 3–5 秒搖勻</h4><p>粉末搖晃均勻，成效較佳</p>
-        </div>
-        <div class="step rv" style="transition-delay:.3s">
-          <svg viewBox="0 0 64 64"><path d="M22 12h20v6H22z"/><path d="M24 18h16l-2 34H26z"/><circle cx="46" cy="46" r="9"/><path d="M46 41v5l3 2"/></svg>
-          <h4>不可放置超過十秒<br>直接飲用完畢</h4><p>沖泡後請立即飲用</p>
-        </div>
-      </div>
-
-      <div class="rules">
-        <div class="rule rv">
-          <h4>食用說明</h4>
-          <ol>
-            <li><b>睡前 30 分鐘</b>，使用兩包高纖莓果飲，加入 240cc 的常溫或冷水，搖勻。</li>
-            <li>配合身體排毒時間，<b>最佳飲用時間為晚上 9–11 點</b>。</li>
-            <li><b>嚴禁溫熱水</b>。</li>
-            <li>喝完請勿進食。</li>
-            <li>經期可以正常食用。</li>
-          </ol>
-          <div class="warn"><b>錯誤食用方法</b><span>請勿直接倒在嘴裡配水吞入，這種食用方式是錯誤的！必須要把粉末搖晃均勻使用後成效較佳。</span></div>
-        </div>
-        <div class="rule rv" style="transition-delay:.12s">
-          <h4>注意事項</h4>
-          <p>收到產品時，請務必記錄您現在的全身照。於之後使用可以很明顯的感受到產品效果以及體態差異。</p>
-          <p>不能只量體重為變化依據，體重僅僅代表肌肉重量。拍照更能表現體態以及身形的變化。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STORY BAND -->
+  <!-- story band -->
   <section class="story">
     <div class="band">
-      <img src="images/hero-product.jpg" alt="露蕾希高纖莓果飲產品照" loading="lazy">
+      <img src="images/lifestyle-bed.jpg" alt="露蕾希高纖莓果飲床邊早晨情境，更輕盈的自己從一杯開始" loading="lazy">
       <div class="txt rv">
-        <div class="eyebrow">Naturally simple</div>
-        <h2><span class="en">Good fiber, brighter days</span>自然更好的自己</h2>
-        <p>我們相信，輕盈不必勉強。露蕾希把特選專利植萃與多重膳食纖維，濃縮成每天一杯的小習慣，陪伴常常外食、忙碌又想好好照顧自己的你。</p>
+        <div class="eyebrow">Good fiber, brighter days</div>
+        <h2><span class="en">From one glass</span>更輕盈的自己，從一杯開始</h2>
+        <p>專為外食族、忙碌上班族設計的輕體代謝飲品。每日 2 包，幫你輕鬆找回順暢快感與青春活力。</p>
         <p>台灣製造，通過多項 SGS 認證。自然美的，更加放心。</p>
         <div class="sig">A healthier, happier you.</div>
       </div>
     </div>
   </section>
 
-  <!-- JOURNAL / POSTERS -->
-  <section id="journal" class="journal">
+  <!-- next pages -->
+  <section class="next">
     <div class="wrap">
-      <div class="head">
-        <div class="kicker">Good to know</div>
-        <h2><span class="en">The Luresh notes</span>使用須知</h2>
-      </div>
-      <div class="posts">
-        <button class="post rv" onclick="openLb('images/poster-travel.jpg','攜帶出國飛行須知')">
-          <div class="thumb"><img src="images/poster-travel.jpg" alt="攜帶出國飛行須知海報" loading="lazy"></div>
-          <h4>攜帶出國飛行須知</h4>
-          <p>粉狀沖泡飲依航空法規定，隨身行李粉狀包裝不得超過 350g。一條 12.5g，隨身行李請控制在 28 包（14 天份）以內；放置託運行李箱則無此限制。</p>
-          <span class="more">查看完整說明</span>
-        </button>
-        <button class="post rv" style="transition-delay:.1s" onclick="openLb('images/poster-howto.jpg','食用方法 Q&A')">
-          <div class="thumb"><img src="images/poster-howto.jpg" alt="食用方法說明與常見問題海報" loading="lazy"></div>
-          <h4>食用方法 Q&amp;A</h4>
-          <p>準備 240cc 常溫或冷水、一次兩包一天一次、蓋上搖杯搖 3–5 秒、不可放置超過十秒直接飲用完畢。四步驟一次看懂。</p>
-          <span class="more">查看完整說明</span>
-        </button>
-        <button class="post rv" style="transition-delay:.2s" onclick="openLb('images/poster-ingredients.jpg','完整成分表')">
-          <div class="thumb"><img src="images/poster-ingredients.jpg" alt="高纖莓果飲完整成分海報" loading="lazy"></div>
-          <h4>完整成分一覽</h4>
-          <p>體態救星、澱粉殺手、加強代謝、抑制食慾。九種嚴選植萃成分，台灣製造，通過多項 SGS 認證。</p>
-          <span class="more">查看完整說明</span>
-        </button>
-      </div>
+      <a href="scene.html" class="rv"><small>PAGE 2</small><b>適合誰・成分告白</b><span>情境場景四問，以及 ① 順暢神隊友、② 天然閃澱救星</span><i>前往</i></a>
+      <a href="about.html" class="rv" style="transition-delay:.1s"><small>PAGE 3</small><b>全效輕體代謝補給</b><span>高纖飽足告別小腹卡關、酵素淨化享受順暢輕盈</span><i>前往</i></a>
+      <a href="guide.html" class="rv" style="transition-delay:.2s"><small>PAGE 4</small><b>食用方法・須知</b><span>四步驟沖泡、食用說明、注意事項、飛行須知</span><i>前往</i></a>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- contact -->
   <section id="contact" class="contact">
     <div class="wrap">
       <div class="kicker">Contact</div>
-      <h2><span class="en">Start today</span>更輕盈的自己，從一杯開始</h2>
-      <p>想了解更多或購買露蕾希高纖莓果飲，歡迎透過以下方式與我們聯繫。</p>
+      <h2><span class="en">Start today</span>想了解更多或購買</h2>
+      <p>歡迎透過以下方式與我們聯繫。</p>
       <div class="btns">
-        <a class="btn" href="#" data-placeholder="LINE 連結待補">加入 LINE 官方帳號</a>
-        <a class="btn ghost" href="#" data-placeholder="IG 連結待補">追蹤 Instagram</a>
+        <a class="btn" href="#">加入 LINE 官方帳號</a>
+        <a class="btn ghost" href="#">追蹤 Instagram</a>
       </div>
     </div>
   </section>
@@ -518,30 +147,17 @@
   <div class="wrap">
     <div class="fgrid">
       <div class="fbrand">
-        <a class="logo" href="#top"><div class="en">LURESH</div><div class="zh">露蕾希</div></a>
+        <a class="logo" href="index.html"><div class="en">LURESH</div><div class="zh">露蕾希</div></a>
         <p>高纖莓果飲 High Fiber Berry Drink。特選專利植萃 × 多重膳食纖維，每日 2 包，喝出輕盈順暢力。</p>
       </div>
-      <div><h5>SHOP</h5><ul><li><a href="#product">高纖莓果飲</a></li><li><a href="#ingredients">成分告白</a></li><li><a href="#scene">適合誰</a></li></ul></div>
-      <div><h5>GUIDE</h5><ul><li><a href="#howto">食用方法</a></li><li><a href="#journal">飛行須知</a></li><li><a href="#journal">注意事項</a></li></ul></div>
+      <div><h5>PAGES</h5><ul><li><a href="index.html">首頁</a></li><li><a href="scene.html">適合誰・成分</a></li><li><a href="about.html">產品介紹</a></li><li><a href="guide.html">食用方法・須知</a></li></ul></div>
+      <div><h5>GUIDE</h5><ul><li><a href="guide.html#steps">沖泡四步驟</a></li><li><a href="guide.html#rules">食用說明</a></li><li><a href="guide.html#travel">飛行須知</a></li></ul></div>
       <div><h5>FOLLOW</h5><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">LINE</a></li></ul></div>
     </div>
     <div class="copy-line"><span>© 2026 LURESH 露蕾希</span><span>台灣製造 · 通過多項 SGS 認證</span></div>
   </div>
 </footer>
 
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="圖片放大檢視" onclick="closeLb(event)">
-  <button aria-label="關閉" onclick="closeLb()">×</button>
-  <img id="lbImg" src="" alt="">
-</div>
-
-<script>
-  function toggleMenu(btn){const m=document.getElementById('mobileMenu');const o=m.classList.toggle('open');btn.setAttribute('aria-expanded',o)}
-  function closeMenu(){document.getElementById('mobileMenu').classList.remove('open')}
-  function openLb(src,alt){const lb=document.getElementById('lb'),im=document.getElementById('lbImg');im.src=src;im.alt=alt;lb.classList.add('open');document.body.style.overflow='hidden'}
-  function closeLb(e){if(e&&e.target&&e.target.id==='lbImg')return;document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
-  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.12});
-  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-</script>
+<script src="site.js"></script>
 </body>
 </html>
