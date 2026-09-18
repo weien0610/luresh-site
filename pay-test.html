@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>付款測試｜露蕾希 LURESH</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .test{max-width:920px;margin:0 auto;padding:56px 24px 96px}
+  .test h1{font-family:var(--tc-serif);font-weight:600;font-size:clamp(26px,3.4vw,38px);letter-spacing:.12em;text-align:center}
+  .test .note{text-align:center;color:var(--ink-soft);font-size:14px;margin:12px auto 40px;max-width:600px}
+  .env{background:#fff;border:1px solid var(--line);padding:18px 22px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:13px;margin-bottom:28px}
+  .env label{letter-spacing:.14em;color:var(--rose);font-weight:500}
+  .env input{flex:1;min-width:240px;border:1px solid var(--line);padding:9px 12px;font:inherit;font-size:13px}
+  .env .st{padding:4px 10px;border-radius:999px;font-size:12px;letter-spacing:.1em;background:var(--blush);color:var(--rose-deep)}
+  .env .st.ok{background:#e6f4ea;color:#1e6b3a}
+  .env .st.bad{background:#fdecec;color:#a02020}
+  .gw{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .box{background:#fff;border:1px solid var(--line);padding:32px 30px}
+  .box h2{font-size:22px;margin-bottom:6px}
+  .box .sub{font-size:13px;color:var(--ink-soft);margin-bottom:22px}
+  .box .row{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
+  .box label{font-size:12px;letter-spacing:.16em;color:var(--ink-soft);display:block;margin-bottom:4px}
+  .box input,.box select{width:100%;border:1px solid var(--line);padding:11px 12px;font:inherit;font-size:14px;background:#fff}
+  .box .btn{width:100%;text-align:center;cursor:pointer}
+  .card{margin-top:18px;font-size:12px;color:var(--ink-soft);background:var(--cream);padding:12px 14px;line-height:1.8}
+  .card b{color:var(--ink);font-weight:500}
+  .result{margin-top:28px;background:#fff;border:1px solid var(--line);padding:26px 30px;display:none}
+  .result.show{display:block}
+  .result h3{font-family:var(--tc-serif);font-size:20px;letter-spacing:.14em;margin-bottom:12px}
+  .result .badge{display:inline-block;padding:4px 14px;border-radius:999px;font-size:13px;letter-spacing:.12em;margin-bottom:12px}
+  .result .paid{background:#e6f4ea;color:#1e6b3a}
+  .result .pending{background:#fff4e0;color:#8a5a00}
+  .result .failed{background:#fdecec;color:#a02020}
+  .result pre{background:var(--cream);padding:14px;font-size:12px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
+  .log{margin-top:18px;font-size:12px;color:var(--ink-soft);white-space:pre-wrap}
+  @media(max-width:800px){.gw{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="bar">付款測試頁<span>·</span>綠界測試環境與 PayPal Sandbox<span>·</span>不會扣真錢</div>
+
+<header>
+  <div class="wrap nav">
+    <span></span>
+    <a class="logo" href="index.html" aria-label="露蕾希 LURESH 首頁">
+      <div class="en">LURESH</div>
+      <div class="zh">露蕾希</div>
+    </a>
+    <div class="tools"><a href="index.html" class="txt">回網站</a></div>
+  </div>
+</header>
+
+<main class="test">
+  <h1>付款流程測試</h1>
+  <p class="note">兩條金流都走官方測試環境。綠界用公開測試商店，PayPal 用 Sandbox。付完款回到這頁會顯示訂單狀態。</p>
+
+  <div class="env">
+    <label>API 位址</label>
+    <input id="apiBase" placeholder="https://luresh-api.xxx.workers.dev">
+    <span id="apiStatus" class="st">檢查中…</span>
+  </div>
+
+  <div class="gw">
+    <!-- 綠界 -->
+    <section class="box">
+      <h2>綠界 ECPay</h2>
+      <p class="sub">測試商店 2000132・送出後會跳到綠界付款頁</p>
+      <form id="ecpayForm" method="post">
+        <div class="row">
+          <div><label>金額（新台幣，整數）</label><input name="amount" type="number" min="1" step="1" value="100" required></div>
+          <div><label>商品名稱</label><input name="itemName" value="露蕾希高纖莓果飲 測試訂單"></div>
+          <div><label>Email（選填）</label><input name="email" type="email" placeholder="test@example.com"></div>
+          <div><label>付款方式</label>
+            <select name="method">
+              <option value="Credit">信用卡</option>
+              <option value="ALL">全部（綠界頁面選）</option>
+              <option value="ATM">ATM 虛擬帳號</option>
+              <option value="CVS">超商代碼</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" type="submit">綠界測試付款</button>
+      </form>
+      <div class="card">
+        <b>測試信用卡</b><br>卡號 4311-9522-2222-2222<br>有效期 任意未來月份・安全碼 222<br>若要求簡訊驗證碼，輸入 1234
+      </div>
+    </section>
+
+    <!-- PayPal -->
+    <section class="box">
+      <h2>PayPal Sandbox</h2>
+      <p class="sub">目前用 PayPal 的通用測試商店（client-id=sb），幣別 USD。拿到客戶的 Sandbox Client ID 後換掉即可。</p>
+      <div class="row">
+        <div><label>金額（USD）</label><input id="ppAmount" type="number" min="1" step="0.01" value="1.00"></div>
+      </div>
+      <div id="paypal-buttons"></div>
+      <div class="card">
+        <b>Sandbox 買家帳號</b><br>在 developer.paypal.com 的 Sandbox Accounts 可看到自動建立的買家帳號與密碼，付款時用它登入。
+      </div>
+    </section>
+  </div>
+
+  <div id="result" class="result">
+    <h3>訂單狀態</h3>
+    <span id="resBadge" class="badge pending">查詢中</span>
+    <pre id="resJson"></pre>
+  </div>
+  <div id="log" class="log"></div>
+</main>
+
+<div style="text-align:center;padding:24px;font-size:11px;letter-spacing:.18em;color:var(--ink-soft)">© 2026 LURESH 露蕾希 · 測試頁</div>
+
+<script>
+  // ---- API 位址 ----
+  const DEFAULT_API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:8787'
+    : 'https://luresh-api.king1234t.workers.dev';
+  const apiInput = document.getElementById('apiBase');
+  apiInput.value = localStorage.getItem('luresh_api') || DEFAULT_API;
+  apiInput.addEventListener('change', () => { localStorage.setItem('luresh_api', apiInput.value.trim()); checkApi(); });
+  const API = () => apiInput.value.trim().replace(/\/$/, '');
+  const log = (m) => { document.getElementById('log').textContent += new Date().toLocaleTimeString() + '  ' + m + '\n'; };
+
+  async function checkApi(){
+    const st = document.getElementById('apiStatus');
+    st.className = 'st'; st.textContent = '檢查中…';
+    try {
+      const r = await fetch(API() + '/api/health'); const j = await r.json();
+      st.className = 'st ok'; st.textContent = 'API 正常';
+      document.getElementById('ecpayForm').action = API() + '/api/ecpay/checkout';
+    } catch (e) { st.className = 'st bad'; st.textContent = '連不到 API'; }
+  }
+  checkApi();
+
+  // ---- 回到本頁時查訂單 ----
+  const orderNo = new URLSearchParams(location.search).get('order');
+  async function showOrder(no){
+    const box = document.getElementById('result'); box.classList.add('show');
+    const badge = document.getElementById('resBadge'); const pre = document.getElementById('resJson');
+    for (let i = 0; i < 6; i++) {
+      try {
+        const r = await fetch(API() + '/api/orders/' + encodeURIComponent(no)); const j = await r.json();
+        pre.textContent = JSON.stringify(j, null, 2);
+        const s = j.status || 'pending';
+        badge.className = 'badge ' + s;
+        badge.textContent = s === 'paid' ? '付款成功' : s === 'failed' ? '付款失敗' : '尚未收到付款結果';
+        if (s !== 'pending') return;
+      } catch (e) { pre.textContent = String(e); }
+      await new Promise(r => setTimeout(r, 3000));
+    }
+    log('等了 18 秒仍未收到綠界回呼。若是本機測試（localhost），綠界連不到你的電腦，這是正常的；部署到 Cloudflare 後才會收到。');
+  }
+  if (orderNo) showOrder(orderNo);
+
+  // ---- PayPal ----
+  function loadPayPal(){
+    const s = document.createElement('script');
+    s.src = 'https://www.paypal.com/sdk/js?client-id=sb&currency=USD&intent=capture';
+    s.onload = () => {
+      paypal.Buttons({
+        style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal' },
+        createOrder: (data, actions) => actions.order.create({
+          purchase_units: [{ description: 'LURESH High Fiber Berry Drink (test)', amount: { currency_code: 'USD', value: Number(document.getElementById('ppAmount').value || 1).toFixed(2) } }]
+        }),
+        onApprove: async (data, actions) => {
+          const details = await actions.order.capture();
+          log('PayPal 付款完成：' + details.id + ' / ' + details.status);
+          const pu = details.purchase_units && details.purchase_units[0];
+          const cap = pu && pu.payments && pu.payments.captures && pu.payments.captures[0];
+          try {
+            const r = await fetch(API() + '/api/paypal/record', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ orderID: details.id, status: details.status, amount: cap && cap.amount && cap.amount.value, currency: cap && cap.amount && cap.amount.currency_code, payer: details.payer && details.payer.email_address }) });
+            const j = await r.json(); showOrder(j.no);
+          } catch (e) { log('記錄到 API 失敗：' + e); }
+        },
+        onError: (err) => log('PayPal 錯誤：' + err),
+        onCancel: () => log('PayPal 付款取消'),
+      }).render('#paypal-buttons');
+    };
+    s.onerror = () => log('PayPal SDK 載入失敗');
+    document.head.appendChild(s);
+  }
+  loadPayPal();
+</script>
+</body>
+</html>
