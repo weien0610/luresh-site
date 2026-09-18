@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>結帳｜露蕾希 LURESH</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="shop.css">
+</head>
+<body>
+
+<div class="bar">台灣製造<span>·</span>通過多項 SGS 認證<span>·</span>單筆滿 NT$2,000 免運</div>
+
+<header>
+  <div class="wrap nav">
+    <button class="burger" aria-label="開啟選單" aria-expanded="false" onclick="toggleMenu(this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul>
+      <li><a href="shop.html">商城</a></li>
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="scene.html">適合誰・成分</a></li>
+      <li><a href="about.html">產品介紹</a></li>
+      <li><a href="guide.html">食用方法・須知</a></li>
+    </ul>
+    <a class="logo" href="index.html" aria-label="露蕾希 LURESH 首頁"><div class="en">LURESH</div><div class="zh">露蕾希</div></a>
+    <div class="tools">
+      <a href="index.html#contact" class="txt">聯絡我們</a>
+      <a href="cart.html" aria-label="購物車" class="bag"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 13H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cnt">0</span></a>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="shop.html">商城</a><a href="index.html">首頁</a><a href="scene.html">適合誰・成分</a><a href="about.html">產品介紹</a><a href="guide.html">食用方法・須知</a><a href="cart.html">購物車</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="shop-head">
+    <h1><small>Checkout</small>填寫資料・付款</h1>
+    <div class="stepbar"><span>1 購物車</span><span class="on">2 填寫資料・付款</span><span>3 完成</span></div>
+  </div>
+
+  <form id="co" class="two" method="post" novalidate>
+    <div style="display:grid;gap:26px">
+      <section class="panel">
+        <h2>收件人資料</h2>
+        <div class="fgrid2">
+          <div class="field"><label for="name">姓名</label><input id="name" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="phone">手機</label><input id="phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="09xx-xxx-xxx"></div>
+          <div class="field full"><label for="email">Email（寄送訂單通知）</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>配送方式</h2>
+        <div class="choices" id="shipChoices">
+          <label class="choice on"><input type="radio" name="shipping" value="cvs" checked><div><b>超商取貨</b><span>7-11 / 全家，2–3 個工作天到店</span></div><i id="feeCvs">NT$ 60</i></label>
+          <label class="choice"><input type="radio" name="shipping" value="home"><div><b>宅配到府</b><span>黑貓宅急便，1–2 個工作天</span></div><i id="feeHome">NT$ 100</i></label>
+        </div>
+        <div class="sub-fields on" id="cvsFields">
+          <div class="fgrid2">
+            <div class="field"><label for="store">取貨門市</label><input id="store" name="store" placeholder="例：7-11 台北門市（上線後接綠界門市地圖）"></div>
+            <div class="field"><label for="storeBrand">超商</label><select id="storeBrand" name="storeBrand"><option value="UNIMART">7-11</option><option value="FAMI">全家</option></select></div>
+          </div>
+        </div>
+        <div class="sub-fields" id="homeFields">
+          <div class="field"><label for="address">收件地址</label><input id="address" name="address" autocomplete="street-address" placeholder="郵遞區號 + 完整地址"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>付款方式</h2>
+        <div class="choices" id="payChoices">
+          <label class="choice on"><input type="radio" name="payment" value="Credit" checked><div><b>信用卡</b><span>VISA / MasterCard / JCB，由綠界 ECPay 安全付款</span></div><i>ECPay</i></label>
+          <label class="choice"><input type="radio" name="payment" value="ATM"><div><b>ATM 轉帳</b><span>取得虛擬帳號後 3 天內轉帳</span></div><i>ECPay</i></label>
+          <label class="choice"><input type="radio" name="payment" value="CVS"><div><b>超商代碼繳費</b><span>到 7-11 / 全家機台列印繳費</span></div><i>ECPay</i></label>
+          <label class="choice"><input type="radio" name="payment" value="paypal"><div><b>PayPal</b><span>海外顧客適用，以美金結帳</span></div><i class="pp">PayPal</i></label>
+        </div>
+        <div id="paypal-zone"><div id="paypal-buttons"></div></div>
+        <label class="agree"><input type="checkbox" id="agree" required><span>我已閱讀並同意購物條款與隱私權政策。食品類商品拆封後恕不退換。</span></label>
+        <div class="err" id="err"></div>
+      </section>
+    </div>
+
+    <aside class="panel summary">
+      <h2>訂單摘要</h2>
+      <div id="items"></div>
+      <div class="line"><span>小計</span><b id="sub">NT$ 0</b></div>
+      <div class="line"><span>運費</span><b id="ship">NT$ 60</b></div>
+      <div class="line total"><small>合計</small><span id="total">NT$ 0</span></div>
+      <button class="btn" type="submit" id="payBtn">前往付款</button>
+      <a class="btn ghost" href="cart.html" style="margin-top:10px;display:block;text-align:center">回購物車</a>
+      <p class="mini">按下「前往付款」會跳到綠界的安全付款頁面完成付款，付款後自動回到本站顯示訂單結果。</p>
+    </aside>
+  </form>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand"><a class="logo" href="index.html"><div class="en">LURESH</div><div class="zh">露蕾希</div></a><p>高纖莓果飲 High Fiber Berry Drink。特選專利植萃 × 多重膳食纖維，每日 2 包，喝出輕盈順暢力。</p></div>
+      <div><h5>SHOP</h5><ul><li><a href="shop.html">商城</a></li><li><a href="cart.html">購物車</a></li><li><a href="order.html">訂單查詢</a></li></ul></div>
+      <div><h5>GUIDE</h5><ul><li><a href="guide.html#steps">沖泡四步驟</a></li><li><a href="guide.html#rules">食用說明</a></li><li><a href="guide.html#travel">飛行須知</a></li></ul></div>
+      <div><h5>FOLLOW</h5><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">LINE</a></li></ul></div>
+    </div>
+    <div class="copy-line"><span>© 2026 LURESH 露蕾希</span><span>台灣製造 · 通過多項 SGS 認證</span></div>
+  </div>
+</footer>
+
+<script src="shop.js"></script>
+<script>
+  const form = document.getElementById('co');
+  const lines = cartLines();
+  if (!lines.length) location.replace('cart.html');
+
+  function shipping(){ return form.shipping.value; }
+  function payment(){ return form.payment.value; }
+  function totals(){ const sub = cartSubtotal(); const ship = shippingFee(shipping()); return { sub, ship, total: sub + ship }; }
+  function render(){
+    document.getElementById('items').innerHTML = lines.map(l => `<div class="line"><span>${PRODUCT.name}・${l.v.name} × ${l.qty}</span><b>${money(l.amount)}</b></div>`).join('');
+    const t = totals();
+    document.getElementById('sub').textContent = money(t.sub);
+    document.getElementById('ship').textContent = t.ship ? money(t.ship) : '免運';
+    document.getElementById('total').textContent = money(t.total);
+    document.getElementById('feeCvs').textContent = t.sub >= SHIPPING.cvs.free ? '免運' : money(SHIPPING.cvs.fee);
+    document.getElementById('feeHome').textContent = t.sub >= SHIPPING.home.free ? '免運' : money(SHIPPING.home.fee);
+    document.getElementById('cvsFields').classList.toggle('on', shipping() === 'cvs');
+    document.getElementById('homeFields').classList.toggle('on', shipping() === 'home');
+    const pp = payment() === 'paypal';
+    document.getElementById('paypal-zone').classList.toggle('on', pp);
+    document.getElementById('payBtn').style.display = pp ? 'none' : '';
+    document.querySelectorAll('.choice').forEach(c => c.classList.toggle('on', c.querySelector('input').checked));
+  }
+  form.addEventListener('change', render);
+  render();
+
+  function validate(){
+    const err = document.getElementById('err'); err.classList.remove('on');
+    const need = [['name','請填寫姓名'],['phone','請填寫手機'],['email','請填寫 Email']];
+    if (shipping() === 'cvs') need.push(['store','請填寫取貨門市']); else need.push(['address','請填寫收件地址']);
+    for (const [id, msg] of need) { const el = document.getElementById(id); if (!el.value.trim()) { err.textContent = msg; err.classList.add('on'); el.focus(); return false; } }
+    if (!document.getElementById('agree').checked) { err.textContent = '請勾選同意購物條款'; err.classList.add('on'); return false; }
+    return true;
+  }
+  function orderPayload(){
+    const t = totals();
+    return {
+      amount: t.total,
+      itemName: lines.map(l => `${PRODUCT.name} ${l.v.name} x${l.qty}`).join('#'),
+      items: lines.map(l => ({ sku: l.variantId, name: l.v.name, qty: l.qty, price: l.v.price })),
+      subtotal: t.sub, shippingFee: t.ship,
+      name: form.name.value.trim(), phone: form.phone.value.trim(), email: form.email.value.trim(),
+      shipping: shipping(), store: form.store.value.trim(), storeBrand: form.storeBrand.value, address: form.address.value.trim(),
+      method: payment(), returnPage: 'order.html',
+    };
+  }
+
+  // 綠界：用真正的表單送出（API 回傳自動跳轉頁）
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!validate()) return;
+    const p = orderPayload();
+    const f = document.createElement('form'); f.method = 'post'; f.action = LURESH_API + '/api/ecpay/checkout';
+    for (const [k, v] of Object.entries(p)) { const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = typeof v === 'object' ? JSON.stringify(v) : v; f.appendChild(i); }
+    document.body.appendChild(f);
+    localStorage.setItem('luresh_last_order', JSON.stringify(p));
+    f.submit();
+  });
+
+  // PayPal（Sandbox 通用商店，USD；正式上線換客戶的 Client ID）
+  const USD_RATE = 32; // 示意匯率，正式上線由客戶決定定價方式
+  const s = document.createElement('script');
+  s.src = 'https://www.paypal.com/sdk/js?client-id=sb&currency=USD&intent=capture';
+  s.onload = () => paypal.Buttons({
+    style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal' },
+    onClick: (data, actions) => validate() ? actions.resolve() : actions.reject(),
+    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ description: 'LURESH High Fiber Berry Drink', amount: { currency_code: 'USD', value: (totals().total / USD_RATE).toFixed(2) } }] }),
+    onApprove: async (data, actions) => {
+      const d = await actions.order.capture();
+      const cap = d.purchase_units?.[0]?.payments?.captures?.[0];
+      const p = orderPayload();
+      const r = await fetch(LURESH_API + '/api/paypal/record', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderID: d.id, status: d.status, amount: cap?.amount?.value, currency: cap?.amount?.currency_code, payer: d.payer?.email_address, order: p }) });
+      const j = await r.json();
+      saveCart([]);
+      location.href = 'order.html?order=' + encodeURIComponent(j.no);
+    },
+  }).render('#paypal-buttons');
+  document.head.appendChild(s);
+</script>
+</body>
+</html>

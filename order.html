@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>訂單狀態｜露蕾希 LURESH</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="shop.css">
+</head>
+<body>
+
+<div class="bar">台灣製造<span>·</span>通過多項 SGS 認證<span>·</span>單筆滿 NT$2,000 免運</div>
+
+<header>
+  <div class="wrap nav">
+    <button class="burger" aria-label="開啟選單" aria-expanded="false" onclick="toggleMenu(this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul>
+      <li><a href="shop.html">商城</a></li>
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="scene.html">適合誰・成分</a></li>
+      <li><a href="about.html">產品介紹</a></li>
+      <li><a href="guide.html">食用方法・須知</a></li>
+    </ul>
+    <a class="logo" href="index.html" aria-label="露蕾希 LURESH 首頁"><div class="en">LURESH</div><div class="zh">露蕾希</div></a>
+    <div class="tools">
+      <a href="index.html#contact" class="txt">聯絡我們</a>
+      <a href="cart.html" aria-label="購物車" class="bag"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 13H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cnt">0</span></a>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="shop.html">商城</a><a href="index.html">首頁</a><a href="scene.html">適合誰・成分</a><a href="about.html">產品介紹</a><a href="guide.html">食用方法・須知</a><a href="cart.html">購物車</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="shop-head">
+    <h1><small>Order</small>訂單狀態</h1>
+    <div class="stepbar"><span>1 購物車</span><span>2 填寫資料・付款</span><span class="on">3 完成</span></div>
+  </div>
+
+  <div class="status">
+    <div class="panel">
+      <div id="lookup" style="display:none">
+        <h2>查詢訂單</h2>
+        <div class="fgrid2"><div class="field full"><label for="no">訂單編號</label><input id="no" placeholder="例：LRMU6R98WZ9W2E"></div></div>
+        <button class="btn" style="margin-top:14px" onclick="go()">查詢</button>
+      </div>
+      <div id="view" style="display:none">
+        <span class="badge pending" id="badge">查詢中…</span>
+        <h2 style="margin-top:16px" id="title">訂單處理中</h2>
+        <p id="msg" style="font-size:14px;color:var(--ink-soft)"></p>
+        <dl id="dl"></dl>
+        <div style="margin-top:26px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn ghost" href="shop.html">繼續選購</a><a class="btn ghost" href="index.html">回首頁</a></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand"><a class="logo" href="index.html"><div class="en">LURESH</div><div class="zh">露蕾希</div></a><p>高纖莓果飲 High Fiber Berry Drink。特選專利植萃 × 多重膳食纖維，每日 2 包，喝出輕盈順暢力。</p></div>
+      <div><h5>SHOP</h5><ul><li><a href="shop.html">商城</a></li><li><a href="cart.html">購物車</a></li><li><a href="order.html">訂單查詢</a></li></ul></div>
+      <div><h5>GUIDE</h5><ul><li><a href="guide.html#steps">沖泡四步驟</a></li><li><a href="guide.html#rules">食用說明</a></li><li><a href="guide.html#travel">飛行須知</a></li></ul></div>
+      <div><h5>FOLLOW</h5><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">LINE</a></li></ul></div>
+    </div>
+    <div class="copy-line"><span>© 2026 LURESH 露蕾希</span><span>台灣製造 · 通過多項 SGS 認證</span></div>
+  </div>
+</footer>
+
+<script src="shop.js"></script>
+<script>
+  const no = new URLSearchParams(location.search).get('order');
+  if (!no) document.getElementById('lookup').style.display = '';
+  else { document.getElementById('view').style.display = ''; show(no); }
+  function go(){ const v = document.getElementById('no').value.trim(); if (v) location.href = 'order.html?order=' + encodeURIComponent(v); }
+
+  const LABEL = { paid: ['付款成功', '我們已收到您的付款，將於 1–2 個工作天內出貨。'], failed: ['付款未完成', '付款未成功，請回購物車重新結帳，或改用其他付款方式。'], pending: ['等待付款結果', 'ATM 或超商代碼請於期限內完成繳費；信用卡若剛付完，狀態會在幾秒內更新。'] };
+  async function show(no){
+    const badge = document.getElementById('badge'), dl = document.getElementById('dl');
+    for (let i = 0; i < 8; i++) {
+      try {
+        const r = await fetch(LURESH_API + '/api/orders/' + encodeURIComponent(no));
+        if (r.status === 404) { badge.className = 'badge failed'; badge.textContent = '查無此訂單'; document.getElementById('title').textContent = '找不到訂單 ' + no; return; }
+        const o = await r.json();
+        const s = o.status || 'pending';
+        badge.className = 'badge ' + s; badge.textContent = LABEL[s][0];
+        document.getElementById('title').textContent = LABEL[s][0];
+        document.getElementById('msg').textContent = LABEL[s][1];
+        const rows = [['訂單編號', o.no], ['付款方式', o.gateway === 'paypal' ? 'PayPal' : (o.paymentType || o.method || '綠界')], ['金額', o.amount ? 'NT$ ' + Number(o.amount).toLocaleString() : (o.tradeAmt ? 'NT$ ' + o.tradeAmt : '')], ['收件人', o.name], ['配送', o.shipping === 'home' ? '宅配：' + (o.address || '') : (o.store ? '超商取貨：' + o.store : '')], ['付款時間', o.paymentDate], ['綠界交易編號', o.ecpayTradeNo], ['備註', o.rtnMsg]];
+        dl.innerHTML = rows.filter(r => r[1]).map(r => `<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');
+        if (s === 'paid') { saveCart([]); return; }
+        if (s === 'failed') return;
+      } catch (e) { document.getElementById('msg').textContent = '連線失敗，請稍後重新整理。'; }
+      await new Promise(r => setTimeout(r, 3000));
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商城｜露蕾希 LURESH</title>
+<meta name="description" content="露蕾希高纖莓果飲線上商城：單盒、兩盒組、三盒組。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="shop.css">
+<style>
+  .plist{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:10px 0 96px}
+  .pcard{display:block;position:relative}
+  .pcard .img{border:1px solid var(--line);background:var(--cream);overflow:hidden;aspect-ratio:1}
+  .pcard .img img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .pcard:hover .img img{transform:scale(1.04)}
+  .pcard .tag{position:absolute;top:14px;left:14px;background:var(--rose);color:#fff;font-size:10px;letter-spacing:.24em;padding:4px 10px;z-index:1}
+  .pcard h3{font-family:var(--tc-serif);font-size:18px;font-weight:600;letter-spacing:.1em;margin:18px 0 2px;text-align:center}
+  .pcard .d{font-size:12px;color:var(--ink-soft);text-align:center;letter-spacing:.08em}
+  .pcard .p{text-align:center;font-family:var(--serif);font-size:20px;margin-top:8px}
+  .pcard .p s{font-size:14px;color:var(--ink-soft);margin-right:8px}
+  .pcard .btn{display:block;text-align:center;margin:16px auto 0;width:100%;cursor:pointer}
+  .pcard .btn.ghost{margin-top:8px}
+  .plist .sub{grid-column:1/-1;text-align:center;font-size:13px;color:var(--ink-soft);margin-top:10px}
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--cream);margin-bottom:56px}
+  .feat img{width:100%;height:100%;object-fit:cover;min-height:320px}
+  .feat .t{padding:56px 48px;display:flex;flex-direction:column;justify-content:center}
+  .feat .t h2{margin:14px 0 14px}
+  .feat .t p{font-size:15px;color:var(--ink-soft);margin-bottom:20px;max-width:440px}
+  @media(max-width:900px){.plist{grid-template-columns:1fr;max-width:420px;margin:0 auto}.feat{grid-template-columns:1fr}.feat .t{padding:36px 24px}}
+</style>
+</head>
+<body>
+
+<div class="bar">台灣製造<span>·</span>通過多項 SGS 認證<span>·</span>單筆滿 NT$2,000 免運</div>
+
+<header>
+  <div class="wrap nav">
+    <button class="burger" aria-label="開啟選單" aria-expanded="false" onclick="toggleMenu(this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul>
+      <li><a href="shop.html" aria-current="page">商城</a></li>
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="scene.html">適合誰・成分</a></li>
+      <li><a href="about.html">產品介紹</a></li>
+      <li><a href="guide.html">食用方法・須知</a></li>
+    </ul>
+    <a class="logo" href="index.html" aria-label="露蕾希 LURESH 首頁"><div class="en">LURESH</div><div class="zh">露蕾希</div></a>
+    <div class="tools">
+      <a href="index.html#contact" class="txt">聯絡我們</a>
+      <a href="cart.html" aria-label="購物車" class="bag"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 13H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cnt">0</span></a>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="shop.html" aria-current="page">商城</a><a href="index.html">首頁</a><a href="scene.html">適合誰・成分</a><a href="about.html">產品介紹</a><a href="guide.html">食用方法・須知</a><a href="cart.html">購物車</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="shop-head">
+    <h1><small>Shop</small>商城</h1>
+  </div>
+
+  <div class="feat">
+    <img src="images/lifestyle-bed.jpg" alt="露蕾希高纖莓果飲床邊早晨情境">
+    <div class="t">
+      <div class="eyebrow">Shop our favorite</div>
+      <h2><span class="en">Every day, two sticks</span>更輕盈的自己，從一杯開始</h2>
+      <p>每日 2 包，睡前 30 分鐘沖 240cc 常溫或冷水搖勻。特選專利植萃 × 多重膳食纖維，低卡負擔、蛋奶素可食。</p>
+      <div><a class="btn" href="product.html?v=box1">看商品</a></div>
+    </div>
+  </div>
+
+  <div class="plist" id="plist"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand"><a class="logo" href="index.html"><div class="en">LURESH</div><div class="zh">露蕾希</div></a><p>高纖莓果飲 High Fiber Berry Drink。特選專利植萃 × 多重膳食纖維，每日 2 包，喝出輕盈順暢力。</p></div>
+      <div><h5>SHOP</h5><ul><li><a href="shop.html">商城</a></li><li><a href="cart.html">購物車</a></li><li><a href="order.html">訂單查詢</a></li></ul></div>
+      <div><h5>GUIDE</h5><ul><li><a href="guide.html#steps">沖泡四步驟</a></li><li><a href="guide.html#rules">食用說明</a></li><li><a href="guide.html#travel">飛行須知</a></li></ul></div>
+      <div><h5>FOLLOW</h5><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">LINE</a></li></ul></div>
+    </div>
+    <div class="copy-line"><span>© 2026 LURESH 露蕾希</span><span>台灣製造 · 通過多項 SGS 認證</span></div>
+  </div>
+</footer>
+
+<script src="shop.js"></script>
+<script>
+  const list = document.getElementById('plist');
+  list.innerHTML = PRODUCT.variants.map((v, i) => `
+    <div class="pcard">
+      ${v.tag ? `<span class="tag">${v.tag}</span>` : ''}
+      <a href="product.html?v=${v.id}" class="img"><img src="${i === 0 ? 'images/hero-product.jpg' : i === 1 ? 'images/lifestyle-bed.jpg' : 'images/ingredients-banner.jpg'}" alt="${PRODUCT.name} ${v.name}"></a>
+      <h3>${PRODUCT.name}・${v.name}</h3>
+      <div class="d">${v.desc}</div>
+      <div class="p">${v.was ? `<s>${money(v.was)}</s>` : ''}${money(v.price)}</div>
+      <button class="btn" onclick="addToCart('${v.id}',1);location.href='cart.html'">加入購物車</button>
+      <a class="btn ghost" href="product.html?v=${v.id}">商品細節</a>
+    </div>`).join('') + '<p class="sub">※ 價格與內容量為示意值，待確認後更新</p>';
+</script>
+</body>
+</html>

@@ -267,7 +267,7 @@ section{padding:104px 0}
 
 /* ===== footer ===== */
 footer{background:#fff;border-top:1px solid var(--line);padding:64px 0 28px}
-.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;font-size:13px}
+.fgrid{display:grid;grid-template-columns:1.4fr repeat(auto-fit,minmax(110px,1fr));gap:40px;font-size:13px}
 .fgrid h5{font-size:11px;letter-spacing:.3em;font-weight:500;margin-bottom:16px;color:var(--rose)}
 .fgrid ul{list-style:none}
 .fgrid li{margin-bottom:8px}
