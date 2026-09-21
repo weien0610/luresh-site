@@ -121,7 +121,7 @@
   function payment(){ return form.payment.value; }
   function totals(){ const sub = cartSubtotal(); const ship = shippingFee(shipping()); return { sub, ship, total: sub + ship }; }
   function render(){
-    document.getElementById('items').innerHTML = lines.map(l => `<div class="line"><span>${PRODUCT.name}・${l.v.name} × ${l.qty}</span><b>${money(l.amount)}</b></div>`).join('');
+    document.getElementById('items').innerHTML = lines.map(l => `<div class="line"><span>${l.p.name}・${l.v.name} × ${l.qty}</span><b>${money(l.amount)}</b></div>`).join('');
     const t = totals();
     document.getElementById('sub').textContent = money(t.sub);
     document.getElementById('ship').textContent = t.ship ? money(t.ship) : '免運';
@@ -150,8 +150,8 @@
     const t = totals();
     return {
       amount: t.total,
-      itemName: lines.map(l => `${PRODUCT.name} ${l.v.name} x${l.qty}`).join('#'),
-      items: lines.map(l => ({ sku: l.variantId, name: l.v.name, qty: l.qty, price: l.v.price })),
+      itemName: lines.map(l => `${l.p.name} ${l.v.name} x${l.qty}`).join('#'),
+      items: lines.map(l => ({ sku: l.p.id + ':' + l.variantId, name: l.p.name + ' ' + l.v.name, qty: l.qty, price: l.v.price })),
       subtotal: t.sub, shippingFee: t.ship,
       name: form.name.value.trim(), phone: form.phone.value.trim(), email: form.email.value.trim(),
       shipping: shipping(), store: form.store.value.trim(), storeBrand: form.storeBrand.value, address: form.address.value.trim(),
@@ -178,7 +178,7 @@
   s.onload = () => paypal.Buttons({
     style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal' },
     onClick: (data, actions) => validate() ? actions.resolve() : actions.reject(),
-    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ description: 'LURESH High Fiber Berry Drink', amount: { currency_code: 'USD', value: (totals().total / USD_RATE).toFixed(2) } }] }),
+    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ description: 'LURESH order', amount: { currency_code: 'USD', value: (totals().total / USD_RATE).toFixed(2) } }] }),
     onApprove: async (data, actions) => {
       const d = await actions.order.capture();
       const cap = d.purchase_units?.[0]?.payments?.captures?.[0];

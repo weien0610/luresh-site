@@ -69,8 +69,8 @@
     <div class="t">
       <div class="eyebrow">Shop our favorite</div>
       <h2><span class="en">Every day, two sticks</span>更輕盈的自己，從一杯開始</h2>
-      <p>每日 2 包，睡前 30 分鐘沖 240cc 常溫或冷水搖勻。特選專利植萃 × 多重膳食纖維，低卡負擔、蛋奶素可食。</p>
-      <div><a class="btn" href="product.html?v=box1">看商品</a></div>
+      <p>高纖莓果飲全新包裝上市，再加入日日水紅茶與茉莉花茶。特選專利植萃 × 多重膳食纖維，低卡負擔、蛋奶素可食。</p>
+      <div><a class="btn" href="product.html?p=hfbd">看高纖莓果飲</a></div>
     </div>
   </div>
 
@@ -92,16 +92,19 @@
 <script src="shop.js"></script>
 <script>
   const list = document.getElementById('plist');
-  list.innerHTML = PRODUCT.variants.map((v, i) => `
+  list.innerHTML = PRODUCTS.map(p => {
+    const base = p.variants[0];
+    const best = p.variants.find(v => v.tag) ;
+    return `
     <div class="pcard">
-      ${v.tag ? `<span class="tag">${v.tag}</span>` : ''}
-      <a href="product.html?v=${v.id}" class="img"><img src="${i === 0 ? 'images/hero-product.jpg' : i === 1 ? 'images/lifestyle-bed.jpg' : 'images/ingredients-banner.jpg'}" alt="${PRODUCT.name} ${v.name}"></a>
-      <h3>${PRODUCT.name}・${v.name}</h3>
-      <div class="d">${v.desc}</div>
-      <div class="p">${v.was ? `<s>${money(v.was)}</s>` : ''}${money(v.price)}</div>
-      <button class="btn" onclick="addToCart('${v.id}',1);location.href='cart.html'">加入購物車</button>
-      <a class="btn ghost" href="product.html?v=${v.id}">商品細節</a>
-    </div>`).join('') + '<p class="sub">※ 價格與內容量為示意值，待確認後更新</p>';
+      ${p.id === 'hfbd' ? '<span class="tag">新包裝</span>' : '<span class="tag">新品</span>'}
+      <a href="product.html?p=${p.id}" class="img"><img src="${p.image}" alt="${p.name}"></a>
+      <h3>${p.name}</h3>
+      <div class="d">${p.en}・${base.desc} 起</div>
+      <div class="p">${money(base.price)} <span style="font-size:13px;color:var(--ink-soft)">起</span></div>
+      <button class="btn" onclick="addToCart('${p.id}','${base.id}',1);location.href='cart.html'">加入購物車（${base.name}）</button>
+      <a class="btn ghost" href="product.html?p=${p.id}">商品細節${best ? '・' + best.name + '更划算' : ''}</a>
+    </div>`; }).join('') + '<p class="sub">※ 價格、內容量與茶品說明為示意值，待確認後更新</p>';
 </script>
 </body>
 </html>

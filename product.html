@@ -3,13 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>高纖莓果飲｜露蕾希 LURESH</title>
-<meta name="description" content="露蕾希高纖莓果飲。特選專利植萃 × 多重膳食纖維，低卡負擔、蛋奶素可食、專利專屬配方。">
+<title>商品｜露蕾希 LURESH</title>
+<meta name="description" content="露蕾希高纖莓果飲、日日水紅茶與茉莉花茶。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="shop.css">
+<style>
+  .related{padding:0 0 96px}
+  .related h2{text-align:center;margin-bottom:34px}
+  .related .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;max-width:760px;margin:0 auto}
+  .related a{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;border:1px solid var(--line);padding:14px;transition:transform .35s,box-shadow .35s}
+  .related a:hover{transform:translateY(-4px);box-shadow:0 18px 36px -24px rgba(142,39,67,.35)}
+  .related img{width:110px;height:110px;object-fit:cover}
+  .related b{font-family:var(--tc-serif);font-size:16px;font-weight:600;letter-spacing:.08em;display:block}
+  .related span{font-size:12px;color:var(--ink-soft);display:block;margin-top:4px}
+  .related i{font-style:normal;font-family:var(--serif);font-size:18px;display:block;margin-top:6px}
+  @media(max-width:600px){.related .grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
@@ -39,20 +51,20 @@
 </header>
 
 <main class="wrap">
-  <div class="crumb"><a href="shop.html">商城</a><span>/</span><span id="crumbName">高纖莓果飲</span></div>
+  <div class="crumb"><a href="shop.html">商城</a><span>/</span><span id="crumbName"></span></div>
 
   <div class="product">
     <div class="gallery">
-      <div class="main"><img id="mainImg" src="images/hero-product.jpg" alt="露蕾希高纖莓果飲"></div>
+      <div class="main"><img id="mainImg" src="" alt=""></div>
       <div class="thumbs" id="thumbs"></div>
     </div>
 
     <div class="pinfo">
-      <div class="eyebrow">High Fiber Berry Drink</div>
-      <h1>露蕾希高纖莓果飲<small>LURESH · Luresh High Fiber</small></h1>
-      <div class="price"><span class="now"><b>NT$</b><span id="priceNow">1,280</span></span><span class="was" id="priceWas"></span><span class="save" id="priceSave" hidden></span></div>
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1><span id="pname"></span><small id="pen"></small></h1>
+      <div class="price"><span class="now"><b>NT$</b><span id="priceNow"></span></span><span class="was" id="priceWas"></span><span class="save" id="priceSave" hidden></span></div>
       <div class="per" id="per"></div>
-      <p class="desc">專為外食族、忙碌上班族設計的輕體代謝飲品。結合多重纖維、強效酵素與阻斷澱粉、燃燒代謝專利萃取。每日 2 包，幫你輕鬆找回順暢快感與青春活力。</p>
+      <p class="desc" id="pdesc"></p>
 
       <div class="opt-label">規格<em id="optName"></em></div>
       <div class="variants" id="variants"></div>
@@ -69,43 +81,16 @@
         <button class="btn" onclick="add(true)">立即購買</button>
       </div>
 
-      <ul class="perks">
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg>低卡負擔，每份僅 34.4 大卡</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg>蛋奶素可食・專利專屬配方</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg>台灣製造，通過多項 SGS 認證</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg>超商取貨、宅配到府，滿 NT$2,000 免運</li>
-      </ul>
-
-      <div class="acc">
-        <details open>
-          <summary>成分</summary>
-          <div class="body">綜合蔬果酵素、魔芋纖維、大麥萃取物、非洲芒果種子萃取物、藤黃果萃取物、白腎豆萃取物、洋車前子多酚、柑橘類黃酮與瓜拿納複合物（甜橙、血橙、葡萄柚及瓜拿納萃取物）、決明子萃取物。</div>
-        </details>
-        <details>
-          <summary>食用方法</summary>
-          <div class="body"><ul>
-            <li>睡前 30 分鐘，使用兩包高纖莓果飲，加入 240cc 的常溫或冷水，搖勻。</li>
-            <li>最佳飲用時間為晚上 9–11 點。嚴禁溫熱水。</li>
-            <li>蓋上搖杯搖 3–5 秒搖勻，不可放置超過十秒，直接飲用完畢。喝完請勿進食。</li>
-            <li>經期可以正常食用。</li>
-          </ul></div>
-        </details>
-        <details>
-          <summary>配送與退換貨</summary>
-          <div class="body"><ul>
-            <li>超商取貨運費 NT$60，宅配 NT$100，單筆滿 NT$2,000 免運。</li>
-            <li>付款完成後 1–2 個工作天出貨。</li>
-            <li>食品類商品拆封後恕不退換；未拆封可於收到 7 天內申請退貨。</li>
-          </ul></div>
-        </details>
-        <details>
-          <summary>攜帶出國</summary>
-          <div class="body">粉狀沖泡飲隨身行李不得超過 350g，一條 12.5g，隨身請控制在 28 包（14 天份）以內；託運則無此限制。</div>
-        </details>
-      </div>
-      <p class="notice">※ 價格與內容量為示意值，待確認後更新</p>
+      <ul class="perks" id="perks"></ul>
+      <div class="acc" id="acc"></div>
+      <p class="notice">※ 價格、內容量與茶品說明為示意值，待確認後更新</p>
     </div>
   </div>
+
+  <section class="related">
+    <h2><span class="en">You may also like</span>其他產品</h2>
+    <div class="grid" id="related"></div>
+  </section>
 </main>
 
 <footer>
@@ -122,39 +107,53 @@
 
 <script src="shop.js"></script>
 <script>
-  const IMAGES = ['images/hero-product.jpg','images/lifestyle-bed.jpg','images/ingredients-banner.jpg','images/poster-ingredients.jpg'];
-  const thumbs = document.getElementById('thumbs');
-  thumbs.innerHTML = IMAGES.map((src, i) => `<button type="button" class="${i===0?'on':''}" onclick="pick(${i})"><img src="${src}" alt=""></button>`).join('');
-  function pick(i){ document.getElementById('mainImg').src = IMAGES[i]; [...thumbs.children].forEach((b, j) => b.classList.toggle('on', i === j)); }
+  const q = new URLSearchParams(location.search);
+  const P = findProduct(q.get('p')) || PRODUCTS[0];
+  let current = P.variants.some(v => v.id === q.get('v')) ? q.get('v') : P.variants[0].id;
 
-  let current = new URLSearchParams(location.search).get('v') || 'box1';
-  if (!PRODUCT.variants.some(v => v.id === current)) current = 'box1';
+  document.title = P.name + '｜露蕾希 LURESH';
+  document.getElementById('crumbName').textContent = P.name;
+  document.getElementById('eyebrow').textContent = P.eyebrow;
+  document.getElementById('pname').textContent = P.name;
+  document.getElementById('pen').textContent = 'LURESH · ' + P.en;
+  document.getElementById('pdesc').textContent = P.desc;
+  document.getElementById('perks').innerHTML = P.perks.concat(['超商取貨、宅配到府，滿 NT$2,000 免運']).map(t => `<li><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg>${t}</li>`).join('');
+  document.getElementById('acc').innerHTML = P.sections.concat([SHIP_SECTION]).map(([t, b], i) => `<details ${i===0?'open':''}><summary>${t}</summary><div class="body">${b}</div></details>`).join('');
+
+  const thumbs = document.getElementById('thumbs');
+  thumbs.innerHTML = P.gallery.map((src, i) => `<button type="button" class="${i===0?'on':''}" onclick="pick(${i})"><img src="${src}" alt=""></button>`).join('');
+  function pick(i){ const m = document.getElementById('mainImg'); m.src = P.gallery[i]; m.alt = P.name; [...thumbs.children].forEach((b, j) => b.classList.toggle('on', i === j)); }
+  pick(0);
+
   const vbox = document.getElementById('variants');
   function renderVariants(){
-    vbox.innerHTML = PRODUCT.variants.map(v => `
+    vbox.innerHTML = P.variants.map(v => `
       <button type="button" class="variant ${v.id===current?'on':''}" onclick="choose('${v.id}')">
         ${v.tag ? `<span class="tag">${v.tag}</span>` : ''}
         <b>${v.name}</b><span>${v.desc}</span><i>${money(v.price)}</i>
       </button>`).join('');
-    const v = PRODUCT.variants.find(v => v.id === current);
+    vbox.style.gridTemplateColumns = `repeat(${Math.min(3, P.variants.length)},1fr)`;
+    const v = P.variants.find(v => v.id === current);
     document.getElementById('priceNow').textContent = v.price.toLocaleString('zh-Hant-TW');
     document.getElementById('priceWas').textContent = v.was ? money(v.was) : '';
     const save = document.getElementById('priceSave');
     if (v.was) { save.hidden = false; save.textContent = '省 ' + money(v.was - v.price); } else save.hidden = true;
     document.getElementById('optName').textContent = v.name + '・' + v.desc;
-    document.getElementById('crumbName').textContent = '高纖莓果飲・' + v.name;
-    const sticks = parseInt(v.desc) || 0;
-    document.getElementById('per').textContent = sticks ? '平均每條 ' + money(Math.round(v.price / sticks)) + '・每日 2 條' : '';
-    history.replaceState(null, '', '?v=' + current);
+    const n = parseInt(v.desc) || 0;
+    document.getElementById('per').textContent = n ? `平均每${P.unit} ${money(Math.round(v.price / n))}・每日 ${P.perDay} ${P.unit}` : '';
+    history.replaceState(null, '', `?p=${P.id}&v=${current}`);
   }
   function choose(id){ current = id; renderVariants(); }
-  function bump(d){ const q = document.getElementById('qty'); q.value = Math.max(1, (parseInt(q.value) || 1) + d); }
+  function bump(d){ const el = document.getElementById('qty'); el.value = Math.max(1, (parseInt(el.value) || 1) + d); }
   function add(buyNow){
     const qty = Math.max(1, parseInt(document.getElementById('qty').value) || 1);
-    addToCart(current, qty);
+    addToCart(P.id, current, qty);
     location.href = buyNow ? 'checkout.html' : 'cart.html';
   }
   renderVariants();
+
+  document.getElementById('related').innerHTML = PRODUCTS.filter(x => x.id !== P.id).map(x => `
+    <a href="product.html?p=${x.id}"><img src="${x.image}" alt=""><div><b>${x.name}</b><span>${x.en}・${x.variants[0].desc}</span><i>${money(x.variants[0].price)} 起</i></div></a>`).join('');
 </script>
 </body>
 </html>

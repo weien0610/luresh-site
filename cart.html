@@ -84,17 +84,17 @@
     } else {
       rows.innerHTML = lines.map(l => `
         <div class="crow">
-          <img src="${PRODUCT.image}" alt="">
+          <img src="${l.p.image}" alt="">
           <div>
-            <div class="nm">${PRODUCT.name}</div>
+            <div class="nm"><a href="product.html?p=${l.p.id}&v=${l.v.id}">${l.p.name}</a></div>
             <div class="vr">${l.v.name}・${l.v.desc}・${money(l.v.price)}</div>
-            <button class="rm" onclick="setQty('${l.variantId}',0);render()">移除</button>
+            <button class="rm" onclick="setQty('${l.p.id}','${l.variantId}',0);render()">移除</button>
           </div>
           <div class="rt">
             <div class="qty">
-              <button type="button" onclick="setQty('${l.variantId}',${l.qty-1});render()">−</button>
-              <input type="number" min="1" value="${l.qty}" onchange="setQty('${l.variantId}',Math.max(1,parseInt(this.value)||1));render()">
-              <button type="button" onclick="setQty('${l.variantId}',${l.qty+1});render()">+</button>
+              <button type="button" onclick="setQty('${l.p.id}','${l.variantId}',${l.qty-1});render()">−</button>
+              <input type="number" min="1" value="${l.qty}" onchange="setQty('${l.p.id}','${l.variantId}',Math.max(1,parseInt(this.value)||1));render()">
+              <button type="button" onclick="setQty('${l.p.id}','${l.variantId}',${l.qty+1});render()">+</button>
             </div>
             <div class="amt">${money(l.amount)}</div>
           </div>
