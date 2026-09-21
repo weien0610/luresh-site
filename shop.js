@@ -3,7 +3,7 @@ const LURESH_API = (location.hostname === 'localhost' || location.hostname === '
   ? 'http://localhost:8787'
   : 'https://luresh-api.king1234t.workers.dev';
 
-// ※ 價格、內容量與茶品說明為示意值，待確認後更新
+// 價格依 7-11 賣貨便賣場（2026-09-21）：一盒 1,680 / 兩盒 3,250 / 10 盒 15,500 / 日日水 590
 const PRODUCTS = [
   {
     id: 'hfbd', name: '露蕾希高纖莓果飲', en: 'High Fiber Berry Drink', eyebrow: 'High Fiber Berry Drink',
@@ -11,12 +11,13 @@ const PRODUCTS = [
     gallery: ['images/hero-product.jpg', 'images/lifestyle-bed.jpg', 'images/ingredients-banner.jpg', 'images/poster-ingredients.jpg'],
     tagline: '擺脫囤積感！每日喝出輕盈順暢力',
     desc: '專為外食族、忙碌上班族設計的輕體代謝飲品。結合多重纖維、強效酵素與阻斷澱粉、燃燒代謝專利萃取。每日 2 包，幫你輕鬆找回順暢快感與青春活力。',
-    perks: ['低卡負擔，每份僅 34.4 大卡', '蛋奶素可食・專利專屬配方', '台灣製造，通過多項 SGS 認證'],
-    unit: '條', perDay: 2,
+    perks: ['低卡負擔，每份僅 34.4 大卡', '蛋奶素可食・專利專屬配方', '台灣製造，通過多項 SGS 認證', '第一次購買免費附搖搖杯'],
+    unit: '入', perDay: 2,
+    addon: { productId: 'cup', label: '附搖搖杯（第一次購買請勾選，免費；第二次購買可不勾）' },
     variants: [
-      { id: 'box1', name: '單盒',   desc: '30 條 · 15 天份', price: 1280, was: null, tag: null },
-      { id: 'box2', name: '兩盒組', desc: '60 條 · 30 天份', price: 2400, was: 2560, tag: '熱銷' },
-      { id: 'box3', name: '三盒組', desc: '90 條 · 45 天份', price: 3480, was: 3840, tag: '最划算' },
+      { id: 'box1',  name: '一盒',   desc: '30 入 · 15 天份', price: 1680,  was: null, tag: null },
+      { id: 'box2',  name: '兩盒',   desc: '60 入 · 30 天份', price: 3250,  was: 3360, tag: '熱銷' },
+      { id: 'box10', name: '十盒',   desc: '300 入 · 5 個月份', price: 15500, was: 16800, tag: '最划算' },
     ],
     sections: [
       ['成分', '綜合蔬果酵素、魔芋纖維、大麥萃取物、非洲芒果種子萃取物、藤黃果萃取物、白腎豆萃取物、洋車前子多酚、柑橘類黃酮與瓜拿納複合物（甜橙、血橙、葡萄柚及瓜拿納萃取物）、決明子萃取物。'],
@@ -25,16 +26,15 @@ const PRODUCTS = [
     ],
   },
   {
-    id: 'tea-black', name: '露蕾希日日水・紅茶', en: 'Black Tea', eyebrow: 'Luresh Daily Tea · Black Tea',
-    image: 'images/tea-black.jpg',
-    gallery: ['images/tea-black.jpg', 'images/tea-jasmine.jpg'],
-    tagline: '一杯茶香，更輕盈的自己',
-    desc: '露蕾希日日水紅茶茶包，日常的輕盈陪伴。（產品說明待補）',
+    id: 'tea-jasmine', name: '露蕾希日日水・茉莉綠茶機能飲', en: 'Jasmine Green Tea', eyebrow: 'Luresh Daily Tea · Jasmine Green Tea',
+    image: 'images/tea-jasmine.jpg',
+    gallery: ['images/tea-jasmine.jpg', 'images/tea-black.jpg'],
+    tagline: '一杯花香，更輕盈的自己',
+    desc: '露蕾希日日水茉莉綠茶機能飲，日常的輕盈陪伴。（產品說明待補）',
     perks: ['每日一杯，隨時沖泡', '台灣製造', '成分與檢驗資料待補'],
     unit: '包', perDay: 1,
     variants: [
-      { id: 'box1', name: '單盒',   desc: '15 包 · 15 天份', price: 680,  was: null, tag: null },
-      { id: 'box2', name: '兩盒組', desc: '30 包 · 30 天份', price: 1280, was: 1360, tag: '熱銷' },
+      { id: 'box1', name: '一盒', desc: '1 盒（包數待補）', price: 590, was: null, tag: null },
     ],
     sections: [
       ['成分', '待補。'],
@@ -42,23 +42,31 @@ const PRODUCTS = [
     ],
   },
   {
-    id: 'tea-jasmine', name: '露蕾希日日水・茉莉花茶', en: 'Jasmine Tea', eyebrow: 'Luresh Daily Tea · Jasmine Tea',
-    image: 'images/tea-jasmine.jpg',
-    gallery: ['images/tea-jasmine.jpg', 'images/tea-black.jpg'],
-    tagline: '一杯花香，更輕盈的自己',
-    desc: '露蕾希日日水茉莉花茶茶包，日常的輕盈陪伴。（產品說明待補）',
+    id: 'tea-black', name: '露蕾希日日水・阿薩姆紅茶', en: 'Assam Black Tea', eyebrow: 'Luresh Daily Tea · Assam Black Tea',
+    image: 'images/tea-black.jpg',
+    gallery: ['images/tea-black.jpg', 'images/tea-jasmine.jpg'],
+    tagline: '一杯茶香，更輕盈的自己',
+    desc: '露蕾希日日水阿薩姆紅茶，日常的輕盈陪伴。（產品說明待補）',
     perks: ['每日一杯，隨時沖泡', '台灣製造', '成分與檢驗資料待補'],
     unit: '包', perDay: 1,
     variants: [
-      { id: 'box1', name: '單盒',   desc: '15 包 · 15 天份', price: 680,  was: null, tag: null },
-      { id: 'box2', name: '兩盒組', desc: '30 包 · 30 天份', price: 1280, was: 1360, tag: '熱銷' },
+      { id: 'box1', name: '一盒', desc: '1 盒（包數待補）', price: 590, was: null, tag: null },
     ],
     sections: [
       ['成分', '待補。'],
       ['沖泡方法', '待補。'],
     ],
   },
+  {
+    // 免費贈品：搖搖杯（不出現在商品列表，由高纖莓果飲商品頁勾選加入）
+    id: 'cup', hidden: true, name: '露蕾希搖搖杯', en: 'Shaker Cup', eyebrow: 'Free gift',
+    image: 'images/poster-howto.jpg', gallery: ['images/poster-howto.jpg'],
+    tagline: '', desc: '首購免費附贈的搖搖杯，沖泡高纖莓果飲使用。', perks: [], unit: '個', perDay: 0,
+    variants: [{ id: 'one', name: '搖搖杯', desc: '首購免費附贈', price: 0, was: null, tag: null }],
+    sections: [],
+  },
 ];
+const VISIBLE_PRODUCTS = PRODUCTS.filter(p => !p.hidden);
 const SHIPPING = {
   cvs:  { name: '超商取貨（7-11 / 全家）', fee: 60,  free: 2000 },
   home: { name: '宅配到府（黑貓）',        fee: 100, free: 2000 },

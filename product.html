@@ -76,6 +76,8 @@
         <button type="button" onclick="bump(1)" aria-label="增加">+</button>
       </div>
 
+      <div id="addon"></div>
+
       <div class="buyrow">
         <button class="btn ghost" onclick="add(false)">加入購物車</button>
         <button class="btn" onclick="add(true)">立即購買</button>
@@ -83,7 +85,7 @@
 
       <ul class="perks" id="perks"></ul>
       <div class="acc" id="acc"></div>
-      <p class="notice">※ 價格、內容量與茶品說明為示意值，待確認後更新</p>
+      <p class="notice" id="notice">※ 茶品包數與說明待補</p>
     </div>
   </div>
 
@@ -145,14 +147,18 @@
   }
   function choose(id){ current = id; renderVariants(); }
   function bump(d){ const el = document.getElementById('qty'); el.value = Math.max(1, (parseInt(el.value) || 1) + d); }
+  document.getElementById('notice').textContent = P.id === 'hfbd' ? '※ 價格與 7-11 賣貨便官方賣場同步' : '※ 茶品包數與說明待補';
+  if (P.addon) document.getElementById('addon').innerHTML = `<label class="agree" style="margin-top:18px"><input type="checkbox" id="addonChk" checked><span>${P.addon.label}</span></label>`;
   function add(buyNow){
     const qty = Math.max(1, parseInt(document.getElementById('qty').value) || 1);
     addToCart(P.id, current, qty);
+    const chk = document.getElementById('addonChk');
+    if (P.addon && chk && chk.checked && !getCart().some(r => r.productId === P.addon.productId)) addToCart(P.addon.productId, findProduct(P.addon.productId).variants[0].id, 1);
     location.href = buyNow ? 'checkout.html' : 'cart.html';
   }
   renderVariants();
 
-  document.getElementById('related').innerHTML = PRODUCTS.filter(x => x.id !== P.id).map(x => `
+  document.getElementById('related').innerHTML = VISIBLE_PRODUCTS.filter(x => x.id !== P.id).map(x => `
     <a href="product.html?p=${x.id}"><img src="${x.image}" alt=""><div><b>${x.name}</b><span>${x.en}・${x.variants[0].desc}</span><i>${money(x.variants[0].price)} 起</i></div></a>`).join('');
 </script>
 </body>
