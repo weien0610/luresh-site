@@ -34,7 +34,7 @@ const PRODUCTS = [
     perks: ['每日一杯，隨時沖泡', '台灣製造', '成分與檢驗資料待補'],
     unit: '包', perDay: 1,
     variants: [
-      { id: 'box1', name: '一盒', desc: '1 盒（包數待補）', price: 590, was: null, tag: null },
+      { id: 'box1', name: '一盒', desc: '30 包 · 30 天份', price: 590, was: null, tag: null },
     ],
     sections: [
       ['成分', '待補。'],
@@ -50,7 +50,7 @@ const PRODUCTS = [
     perks: ['每日一杯，隨時沖泡', '台灣製造', '成分與檢驗資料待補'],
     unit: '包', perDay: 1,
     variants: [
-      { id: 'box1', name: '一盒', desc: '1 盒（包數待補）', price: 590, was: null, tag: null },
+      { id: 'box1', name: '一盒', desc: '30 包 · 30 天份', price: 590, was: null, tag: null },
     ],
     sections: [
       ['成分', '待補。'],

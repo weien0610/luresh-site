@@ -85,7 +85,7 @@
 
       <ul class="perks" id="perks"></ul>
       <div class="acc" id="acc"></div>
-      <p class="notice" id="notice">※ 茶品包數與說明待補</p>
+      <p class="notice" id="notice">※ 茶品說明待補</p>
     </div>
   </div>
 
@@ -147,7 +147,7 @@
   }
   function choose(id){ current = id; renderVariants(); }
   function bump(d){ const el = document.getElementById('qty'); el.value = Math.max(1, (parseInt(el.value) || 1) + d); }
-  document.getElementById('notice').textContent = P.id === 'hfbd' ? '※ 價格與 7-11 賣貨便官方賣場同步' : '※ 茶品包數與說明待補';
+  document.getElementById('notice').textContent = P.id === 'hfbd' ? '※ 價格與 7-11 賣貨便官方賣場同步' : '※ 茶品說明待補';
   if (P.addon) document.getElementById('addon').innerHTML = `<label class="agree" style="margin-top:18px"><input type="checkbox" id="addonChk" checked><span>${P.addon.label}</span></label>`;
   function add(buyNow){
     const qty = Math.max(1, parseInt(document.getElementById('qty').value) || 1);
