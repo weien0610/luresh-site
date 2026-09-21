@@ -267,23 +267,21 @@ section{padding:104px 0}
 
 /* ===== footer ===== */
 footer{background:#fff;border-top:1px solid var(--line);padding:56px 0 24px}
-.fgrid{display:grid;grid-template-columns:minmax(240px,1fr) 2fr;gap:14px 64px;font-size:13px;align-items:start}
-.fbrand{grid-row:1/span 3}
+.fgrid{display:grid;grid-template-columns:1.3fr repeat(auto-fit,minmax(130px,1fr));gap:24px 40px;font-size:13px;align-items:start}
 .fbrand .logo{display:inline-block;margin-bottom:16px}
 .fbrand p{color:var(--ink-soft);font-size:13px;max-width:320px}
-.fgrid>div:not(.fbrand){display:grid;grid-template-columns:72px 1fr;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}
-.fgrid>div:not(.fbrand):last-child{border-bottom:0}
-.fgrid h5{font-size:11px;letter-spacing:.3em;font-weight:500;color:var(--rose);margin:0}
-.fgrid ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 24px}
-.fgrid li{margin:0}
+.fgrid h5{font-size:11px;letter-spacing:.3em;font-weight:500;color:var(--rose);margin:0 0 12px;line-height:1.6}
+.fgrid ul{list-style:none;display:grid;gap:6px}
+.fgrid li{margin:0;line-height:1.7}
 .fgrid li a:hover{color:var(--rose)}
-.copy-line{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;letter-spacing:.18em;color:var(--ink-soft)}
+.copy-line{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;letter-spacing:.18em;color:var(--ink-soft)}
 @media(max-width:900px){
   footer{padding:44px 0 24px}
   .fgrid{grid-template-columns:1fr;gap:8px}
-  .fbrand{grid-row:auto;margin-bottom:10px}
-  .fgrid>div:not(.fbrand){grid-template-columns:auto 1fr;border-bottom:0;border-top:1px solid var(--line);padding:14px 0 6px}
-  .fgrid h5{min-width:64px}
+  .fbrand{margin-bottom:10px}
+  .fgrid>div:not(.fbrand){display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;border-top:1px solid var(--line);padding:14px 0 6px}
+  .fgrid h5{min-width:64px;margin:0}
+  .fgrid ul{display:flex;flex-wrap:wrap;gap:6px 24px}
   .copy-line{margin-top:26px}
 }
 
