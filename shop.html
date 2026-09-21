@@ -80,7 +80,6 @@
   const list = document.getElementById('plist');
   list.innerHTML = VISIBLE_PRODUCTS.map(p => {
     const base = p.variants[0];
-    const best = p.variants.find(v => v.tag) ;
     return `
     <div class="pcard">
       ${p.id === 'hfbd' ? '<span class="tag">新包裝</span>' : '<span class="tag">新品</span>'}
@@ -88,7 +87,6 @@
       <h3>${p.name}</h3>
       <div class="d">${p.en}・${base.desc} 起</div>
       <div class="p">${money(base.price)} <span style="font-size:13px;color:var(--ink-soft)">起</span></div>
-      ${best && best.boxes ? `<div class="d" style="color:var(--rose)">${best.name}每盒 ${money(Math.round(best.price/best.boxes))}，更划算</div>` : ''}
       <a class="btn" href="product.html?p=${p.id}">前往購買</a>
     </div>`; }).join('') + '<p class="sub">※ 茶品說明待補</p>';
 </script>
