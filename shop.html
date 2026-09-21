@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="shop.css">
 <style>
-  .plist{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:10px 0 96px}
+  .plist{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:16px 0 96px}
   .pcard{display:block;position:relative}
   .pcard .img{display:block;border:1px solid var(--line);background:var(--cream);overflow:hidden;aspect-ratio:1}
   .pcard .img img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -24,12 +24,7 @@
   .pcard .btn{display:block;text-align:center;margin:16px auto 0;width:100%;cursor:pointer}
   .pcard .btn.ghost{margin-top:8px}
   .plist .sub{grid-column:1/-1;text-align:center;font-size:13px;color:var(--ink-soft);margin-top:10px}
-  .feat{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--cream);margin-bottom:56px}
-  .feat img{width:100%;height:100%;object-fit:cover;min-height:320px}
-  .feat .t{padding:56px 48px;display:flex;flex-direction:column;justify-content:center}
-  .feat .t h2{margin:14px 0 14px}
-  .feat .t p{font-size:15px;color:var(--ink-soft);margin-bottom:20px;max-width:440px}
-  @media(max-width:900px){.plist{grid-template-columns:1fr;max-width:420px;margin:0 auto}.feat{grid-template-columns:1fr}.feat .t{padding:36px 24px}}
+  @media(max-width:900px){.plist{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
 </style>
 </head>
 <body>
@@ -64,15 +59,6 @@
     <h1><small>Shop</small>商城</h1>
   </div>
 
-  <div class="feat">
-    <img src="images/lifestyle-bed.jpg" alt="露蕾希高纖莓果飲床邊早晨情境">
-    <div class="t">
-      <div class="eyebrow">Shop our favorite</div>
-      <h2><span class="en">Every day, two sticks</span>更輕盈的自己，從一杯開始</h2>
-      <p>高纖莓果飲全新包裝上市，再加入日日水茉莉綠茶機能飲與阿薩姆紅茶。特選專利植萃 × 多重膳食纖維，低卡負擔、蛋奶素可食。</p>
-      <div><a class="btn" href="product.html?p=hfbd">看高纖莓果飲</a></div>
-    </div>
-  </div>
 
   <div class="plist" id="plist"></div>
 </main>
