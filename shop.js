@@ -15,9 +15,9 @@ const PRODUCTS = [
     unit: '入', perDay: 2,
     addon: { productId: 'cup', label: '附搖搖杯（第一次購買請勾選，免費；第二次購買可不勾）' },
     variants: [
-      { id: 'box1',  name: '一盒',   desc: '30 入 · 15 天份', price: 1680,  was: null, tag: null },
-      { id: 'box2',  name: '兩盒',   desc: '60 入 · 30 天份', price: 3250,  was: 3360, tag: '熱銷' },
-      { id: 'box10', name: '十盒',   desc: '300 入 · 5 個月份', price: 15500, was: 16800, tag: '最划算' },
+      { id: 'box1',  name: '一盒',   desc: '30 入 · 15 天份', price: 1680,  was: null,  tag: null,   boxes: 1 },
+      { id: 'box2',  name: '兩盒',   desc: '60 入 · 30 天份', price: 3250,  was: 3360,  tag: '熱銷', boxes: 2 },
+      { id: 'box10', name: '十盒',   desc: '300 入 · 5 個月份', price: 15500, was: 16800, tag: '最划算', boxes: 10 },
     ],
     sections: [
       ['成分', '綜合蔬果酵素、魔芋纖維、大麥萃取物、非洲芒果種子萃取物、藤黃果萃取物、白腎豆萃取物、洋車前子多酚、柑橘類黃酮與瓜拿納複合物（甜橙、血橙、葡萄柚及瓜拿納萃取物）、決明子萃取物。'],
@@ -72,6 +72,31 @@ const SHIPPING = {
   home: { name: '宅配到府（黑貓）',        fee: 100, free: 2000 },
 };
 const SHIP_SECTION = ['配送與退換貨', '<ul><li>超商取貨運費 NT$60，宅配 NT$100，單筆滿 NT$2,000 免運。</li><li>付款完成後 1–2 個工作天出貨。</li><li>食品類商品拆封後恕不退換；未拆封可於收到 7 天內申請退貨。</li></ul>'];
+
+/* ---- 盒數最優組合（避免客人買一盒 x2 比兩盒還貴）---- */
+function bestCombo(product, n){
+  const vs = product.variants.filter(v => v.boxes);
+  const best = Array(n + 1).fill(null); best[0] = { total: 0, pick: {} };
+  for (let i = 1; i <= n; i++) for (const v of vs) {
+    if (v.boxes > i || !best[i - v.boxes]) continue;
+    const t = best[i - v.boxes].total + v.price;
+    if (!best[i] || t < best[i].total) best[i] = { total: t, pick: { ...best[i - v.boxes].pick, [v.id]: (best[i - v.boxes].pick[v.id] || 0) + 1 } };
+  }
+  return best[n];
+}
+function comboSuggestion(productId){
+  const p = findProduct(productId); if (!p) return null;
+  const lines = cartLines().filter(l => l.p.id === productId && l.v.boxes);
+  if (!lines.length) return null;
+  const n = lines.reduce((s, l) => s + l.v.boxes * l.qty, 0);
+  const cur = lines.reduce((s, l) => s + l.amount, 0);
+  const best = bestCombo(p, n);
+  if (!best || best.total >= cur) return null;
+  return { product: p, boxes: n, current: cur, total: best.total, save: cur - best.total,
+    label: Object.entries(best.pick).map(([id, q]) => p.variants.find(v => v.id === id).name + (q > 1 ? ' ×' + q : '')).join(' + '),
+    apply(){ let cart = getCart().filter(r => !(r.productId === productId && p.variants.find(v => v.id === r.variantId && v.boxes)));
+      for (const [id, q] of Object.entries(best.pick)) cart.push({ productId, variantId: id, qty: q }); saveCart(cart); } };
+}
 
 const money = n => 'NT$ ' + Number(n).toLocaleString('zh-Hant-TW');
 const findProduct = id => PRODUCTS.find(p => p.id === id);

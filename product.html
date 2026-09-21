@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="shop.css">
+<link rel="stylesheet" href="styles.css?v=20260921b">
+<link rel="stylesheet" href="shop.css?v=20260921b">
 <style>
   .related{padding:0 0 96px}
   .related h2{text-align:center;margin-bottom:34px}
@@ -107,7 +107,7 @@
   </div>
 </footer>
 
-<script src="shop.js"></script>
+<script src="shop.js?v=20260921b"></script>
 <script>
   const q = new URLSearchParams(location.search);
   const P = findProduct(q.get('p')) || PRODUCTS[0];
@@ -132,7 +132,7 @@
     vbox.innerHTML = P.variants.map(v => `
       <button type="button" class="variant ${v.id===current?'on':''}" onclick="choose('${v.id}')">
         ${v.tag ? `<span class="tag">${v.tag}</span>` : ''}
-        <b>${v.name}</b><span>${v.desc}</span><i>${money(v.price)}</i>
+        <b>${v.name}</b><span>${v.desc}</span><i>${money(v.price)}</i>${v.boxes > 1 ? `<span style="color:var(--rose)">每盒 ${money(Math.round(v.price / v.boxes))}・省 ${money(v.was - v.price)}</span>` : ''}
       </button>`).join('');
     vbox.style.gridTemplateColumns = `repeat(${Math.min(3, P.variants.length)},1fr)`;
     const v = P.variants.find(v => v.id === current);

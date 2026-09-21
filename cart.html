@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="shop.css">
+<link rel="stylesheet" href="styles.css?v=20260921b">
+<link rel="stylesheet" href="shop.css?v=20260921b">
 </head>
 <body>
 
@@ -47,6 +47,7 @@
   <div class="two">
     <div class="panel">
       <h2>商品</h2>
+      <div id="tip"></div>
       <div id="rows"></div>
     </div>
     <aside class="panel summary">
@@ -73,7 +74,7 @@
   </div>
 </footer>
 
-<script src="shop.js"></script>
+<script src="shop.js?v=20260921b"></script>
 <script>
   function render(){
     const lines = cartLines();
@@ -101,6 +102,9 @@
         </div>`).join('');
       document.getElementById('goCheckout').style.display = '';
     }
+    const sug = comboSuggestion('hfbd'); const tip = document.getElementById('tip');
+    tip.innerHTML = sug ? `<div class="warn" style="margin:0 0 18px;grid-template-columns:1fr auto"><span><b style="font-size:15px;letter-spacing:.1em">同樣 ${sug.boxes} 盒，改成「${sug.label}」可省 ${money(sug.save)}</b><br><span style="font-size:13px;opacity:.9">目前 ${money(sug.current)} → 改後 ${money(sug.total)}</span></span><button class="btn" style="background:#fff;color:var(--rose-deep);border-color:#fff;white-space:nowrap" onclick="window.__sug.apply();render()">一鍵改成優惠組合</button></div>` : '';
+    window.__sug = sug;
     const sub = cartSubtotal(), ship = lines.length ? shippingFee('cvs') : 0;
     document.getElementById('sub').textContent = money(sub);
     document.getElementById('ship').textContent = ship ? money(ship) : '免運';
