@@ -81,7 +81,7 @@
   else { document.getElementById('view').style.display = ''; show(no); }
   function go(){ const v = document.getElementById('no').value.trim(); if (v) location.href = 'order.html?order=' + encodeURIComponent(v); }
 
-  const LABEL = { paid: ['付款成功', '我們已收到您的付款，將於 1–2 個工作天內出貨。'], failed: ['付款未完成', '付款未成功，請回購物車重新結帳，或改用其他付款方式。'], pending: ['等待付款結果', 'ATM 或超商代碼請於期限內完成繳費；信用卡若剛付完，狀態會在幾秒內更新。'] };
+  const LABEL = { paid: ['付款成功', '我們已收到您的付款，將於 1–2 個工作天內出貨。'], shipped: ['已出貨', '您的商品已寄出。超商取貨請留意簡訊通知，宅配預計 1–2 個工作天送達。'], cancelled: ['訂單已取消', '此訂單已取消，若有疑問請與我們聯繫。'], failed: ['付款未完成', '付款未成功，請回購物車重新結帳，或改用其他付款方式。'], pending: ['等待付款結果', 'ATM 或超商代碼請於期限內完成繳費；信用卡若剛付完，狀態會在幾秒內更新。'] };
   async function show(no){
     const badge = document.getElementById('badge'), dl = document.getElementById('dl');
     for (let i = 0; i < 8; i++) {
@@ -90,13 +90,13 @@
         if (r.status === 404) { badge.className = 'badge failed'; badge.textContent = '查無此訂單'; document.getElementById('title').textContent = '找不到訂單 ' + no; return; }
         const o = await r.json();
         const s = o.status || 'pending';
-        badge.className = 'badge ' + s; badge.textContent = LABEL[s][0];
+        badge.className = 'badge ' + (s === 'shipped' ? 'paid' : s === 'cancelled' ? 'failed' : s); badge.textContent = LABEL[s][0];
         document.getElementById('title').textContent = LABEL[s][0];
         document.getElementById('msg').textContent = LABEL[s][1];
-        const rows = [['訂單編號', o.no], ['付款方式', o.gateway === 'paypal' ? 'PayPal' : (o.paymentType || o.method || '綠界')], ['金額', o.amount ? 'NT$ ' + Number(o.amount).toLocaleString() : (o.tradeAmt ? 'NT$ ' + o.tradeAmt : '')], ['收件人', o.name], ['配送', o.shipping === 'home' ? '宅配：' + (o.address || '') : (o.store ? '超商取貨：' + o.store : '')], ['付款時間', o.paymentDate], ['綠界交易編號', o.ecpayTradeNo], ['備註', o.rtnMsg]];
+        const rows = [['訂單編號', o.no], ['付款方式', o.gateway === 'paypal' ? 'PayPal' : (o.paymentType || o.method || '綠界')], ['金額', o.amount ? 'NT$ ' + Number(o.amount).toLocaleString() : (o.tradeAmt ? 'NT$ ' + o.tradeAmt : '')], ['收件人', o.name], ['配送', o.shipping === 'home' ? '宅配：' + (o.address || '') : (o.store ? '超商取貨：' + o.store : '')], ['付款時間', o.paymentDate], ['綠界交易編號', o.ecpayTradeNo], ['出貨時間', o.shippedAt ? o.shippedAt.replace('T',' ').slice(0,16) : ''], ['物流', o.carrier], ['物流單號／寄件代碼', o.tracking], ['出貨備註', o.shipNote], ['備註', o.rtnMsg]];
         dl.innerHTML = rows.filter(r => r[1]).map(r => `<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');
-        if (s === 'paid') { saveCart([]); return; }
-        if (s === 'failed') return;
+        if (s === 'paid' || s === 'shipped') { saveCart([]); return; }
+        if (s === 'failed' || s === 'cancelled') return;
       } catch (e) { document.getElementById('msg').textContent = '連線失敗，請稍後重新整理。'; }
       await new Promise(r => setTimeout(r, 3000));
     }

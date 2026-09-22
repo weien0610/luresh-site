@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>訂單管理｜露蕾希 LURESH</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=20260922a">
+<link rel="stylesheet" href="shop.css?v=20260922a">
+<style>
+  body{background:var(--cream)}
+  .adm{max-width:1180px;margin:0 auto;padding:32px 24px 80px}
+  .adm h1{font-family:var(--tc-serif);font-weight:600;font-size:26px;letter-spacing:.14em;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .adm h1 small{font-family:var(--serif);font-style:italic;font-weight:400;font-size:14px;letter-spacing:.24em;color:var(--rose)}
+  .login{max-width:420px;margin:60px auto;background:#fff;border:1px solid var(--line);padding:32px}
+  .login p{font-size:13px;color:var(--ink-soft);margin-bottom:16px}
+  .bar2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0 14px}
+  .chip{border:1px solid var(--line);background:#fff;padding:7px 14px;font-size:12px;letter-spacing:.14em;cursor:pointer;font:inherit}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .chip b{font-weight:500;margin-left:6px;opacity:.7}
+  .bar2 .sp{flex:1}
+  .bar2 input{border:1px solid var(--line);padding:8px 12px;font:inherit;font-size:13px;min-width:200px}
+  .tbl{background:#fff;border:1px solid var(--line);overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:860px}
+  th{font-size:11px;letter-spacing:.2em;color:var(--ink-soft);font-weight:500;text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr.row{cursor:pointer}
+  tr.row:hover td{background:var(--cream)}
+  tr.row.open td{background:var(--blush)}
+  .st{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em;white-space:nowrap}
+  .st.pending{background:#fff4e0;color:#8a5a00}.st.paid{background:#e6f4ea;color:#1e6b3a}.st.shipped{background:#e3ecfb;color:#1d4f9c}.st.failed,.st.cancelled{background:#fdecec;color:#a02020}
+  .amt{font-family:var(--serif);font-size:16px;white-space:nowrap}
+  .no{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+  .muted{color:var(--ink-soft);font-size:12px}
+  tr.detail td{background:#fff;padding:0;border-bottom:2px solid var(--rose-soft)}
+  .dbox{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;padding:22px 18px}
+  .dbox h3{font-family:var(--tc-serif);font-size:15px;letter-spacing:.14em;font-weight:600;margin-bottom:10px;color:var(--rose-deep)}
+  .dbox dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13px}
+  .dbox dt{color:var(--ink-soft);letter-spacing:.1em;font-size:12px;white-space:nowrap}
+  .dbox dd{word-break:break-all}
+  .dbox .field{margin-bottom:10px}
+  .dbox .btn{cursor:pointer;padding:12px 22px;font-size:12px}
+  .dbox textarea{min-height:64px;resize:vertical}
+  .ok{color:#1e6b3a;font-size:12px;margin-top:8px}
+  .bad{color:#a02020;font-size:12px;margin-top:8px}
+  .copy{background:none;border:1px solid var(--line);font-size:11px;letter-spacing:.12em;padding:4px 8px;cursor:pointer;margin-left:6px;font:inherit}
+  @media(max-width:800px){.dbox{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="bar">露蕾希 訂單管理後台<span>·</span>僅限內部使用</div>
+
+<main class="adm">
+  <h1>訂單管理 <small>Orders</small><span class="sp"></span><button class="chip" onclick="logout()" id="logoutBtn" style="display:none">登出</button></h1>
+
+  <div class="login" id="login">
+    <p>輸入後台密碼登入。密碼由 Cloudflare 的 ADMIN_TOKEN 設定。</p>
+    <div class="field"><label for="tok">後台密碼</label><input id="tok" type="password" autocomplete="current-password"></div>
+    <button class="btn" style="margin-top:14px;cursor:pointer" onclick="login()">登入</button>
+    <div class="bad" id="loginErr"></div>
+  </div>
+
+  <div id="app" style="display:none">
+    <div class="bar2">
+      <button class="chip on" data-f="all" onclick="setFilter('all',this)">全部<b id="cAll">0</b></button>
+      <button class="chip" data-f="paid" onclick="setFilter('paid',this)">待出貨<b id="cPaid">0</b></button>
+      <button class="chip" data-f="shipped" onclick="setFilter('shipped',this)">已出貨<b id="cShipped">0</b></button>
+      <button class="chip" data-f="pending" onclick="setFilter('pending',this)">待付款<b id="cPending">0</b></button>
+      <button class="chip" data-f="other" onclick="setFilter('other',this)">失敗／取消<b id="cOther">0</b></button>
+      <span class="sp"></span>
+      <input id="q" placeholder="搜尋訂單編號、姓名、電話" oninput="render()">
+      <button class="chip" onclick="load()">重新整理</button>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>訂單</th><th>狀態</th><th>收件人</th><th>配送</th><th>品項</th><th style="text-align:right">金額</th><th>時間</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:12px">點一列展開明細與出貨操作。標記出貨後會自動寄「已出貨」信給買家。</p>
+  </div>
+</main>
+
+<script src="shop.js?v=20260922a"></script>
+<script>
+  const API = LURESH_API;
+  let TOKEN = sessionStorage.getItem('luresh_admin') || '';
+  let ORDERS = [], FILTER = 'all', OPEN = null, DETAIL = {};
+  const H = () => ({ 'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json' });
+  const ST = { pending: '待付款', paid: '已付款・待出貨', shipped: '已出貨', failed: '付款失敗', cancelled: '已取消' };
+  const fmt = d => d ? String(d).replace('T', ' ').slice(0, 16) : '';
+  const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+  async function login(){
+    TOKEN = document.getElementById('tok').value.trim();
+    const err = document.getElementById('loginErr'); err.textContent = '';
+    try {
+      const r = await fetch(API + '/api/admin/orders', { headers: H() });
+      if (r.status === 401) { err.textContent = '密碼錯誤'; return; }
+      if (r.status === 503) { err.textContent = '後台尚未設定密碼（ADMIN_TOKEN）'; return; }
+      sessionStorage.setItem('luresh_admin', TOKEN);
+      show(); ORDERS = (await r.json()).orders; render();
+    } catch (e) { err.textContent = '連不到 API'; }
+  }
+  function logout(){ sessionStorage.removeItem('luresh_admin'); location.reload(); }
+  function show(){ document.getElementById('login').style.display = 'none'; document.getElementById('app').style.display = ''; document.getElementById('logoutBtn').style.display = ''; }
+  async function load(){
+    const r = await fetch(API + '/api/admin/orders', { headers: H() });
+    if (r.status === 401) { logout(); return; }
+    ORDERS = (await r.json()).orders; DETAIL = {}; render();
+  }
+  function setFilter(f, el){ FILTER = f; document.querySelectorAll('.chip[data-f]').forEach(c => c.classList.toggle('on', c === el)); render(); }
+  function match(o){
+    const q = document.getElementById('q').value.trim().toLowerCase();
+    if (q && ![o.no, o.name, o.phone].some(v => String(v || '').toLowerCase().includes(q))) return false;
+    if (FILTER === 'all') return true;
+    if (FILTER === 'other') return o.status === 'failed' || o.status === 'cancelled';
+    return o.status === FILTER;
+  }
+  function render(){
+    const c = s => ORDERS.filter(o => o.status === s).length;
+    document.getElementById('cAll').textContent = ORDERS.length;
+    document.getElementById('cPaid').textContent = c('paid');
+    document.getElementById('cShipped').textContent = c('shipped');
+    document.getElementById('cPending').textContent = c('pending');
+    document.getElementById('cOther').textContent = c('failed') + c('cancelled');
+    const list = ORDERS.filter(match);
+    document.getElementById('rows').innerHTML = list.length ? list.map(o => `
+      <tr class="row ${OPEN === o.no ? 'open' : ''}" onclick="toggle('${esc(o.no)}')">
+        <td class="no">${esc(o.no)}<div class="muted">${o.gateway === 'paypal' ? 'PayPal' : '綠界'}</div></td>
+        <td><span class="st ${esc(o.status)}">${ST[o.status] || esc(o.status)}</span></td>
+        <td>${esc(o.name)}<div class="muted">${esc(o.phone)}</div></td>
+        <td>${o.shipping === 'home' ? '宅配' : (o.shipping ? '超商' : '')}<div class="muted">${esc(o.store)}</div></td>
+        <td class="muted">${esc(o.items)}</td>
+        <td class="amt" style="text-align:right">NT$ ${Number(o.amount || 0).toLocaleString()}</td>
+        <td class="muted">${fmt(o.createdAt)}${o.shippedAt ? '<br>出貨 ' + fmt(o.shippedAt) : ''}</td>
+      </tr>${OPEN === o.no ? `<tr class="detail"><td colspan="7"><div class="dbox" id="d-${esc(o.no)}">載入中…</div></td></tr>` : ''}`).join('')
+      : `<tr><td colspan="7" class="muted" style="text-align:center;padding:36px">沒有符合的訂單</td></tr>`;
+    if (OPEN) loadDetail(OPEN);
+  }
+  function toggle(no){ OPEN = OPEN === no ? null : no; render(); }
+  async function loadDetail(no){
+    const box = document.getElementById('d-' + no); if (!box) return;
+    if (!DETAIL[no]) { const r = await fetch(API + '/api/orders/' + encodeURIComponent(no)); DETAIL[no] = await r.json(); }
+    const o = DETAIL[no];
+    const ship = o.shipping === 'home' ? '宅配：' + (o.address || '') : '超商取貨：' + (o.storeBrand === 'FAMI' ? '全家' : '7-11') + ' ' + (o.store || '');
+    const items = (o.items || []).map(i => `${esc(i.name)} × ${i.qty}　NT$ ${Number(i.price * i.qty).toLocaleString()}`).join('<br>');
+    const canShip = o.status === 'paid' || o.status === 'shipped';
+    box.innerHTML = `
+      <div>
+        <h3>訂單明細</h3>
+        <dl>
+          <dt>收件人</dt><dd>${esc(o.name)}<button class="copy" onclick="event.stopPropagation();cp('${esc(o.name)}')">複製</button></dd>
+          <dt>電話</dt><dd>${esc(o.phone)}<button class="copy" onclick="event.stopPropagation();cp('${esc(o.phone)}')">複製</button></dd>
+          <dt>Email</dt><dd>${esc(o.email)}</dd>
+          <dt>配送</dt><dd>${esc(ship)}<button class="copy" onclick="event.stopPropagation();cp('${esc(ship)}')">複製</button></dd>
+          <dt>品項</dt><dd>${items}</dd>
+          <dt>金額</dt><dd>NT$ ${Number(o.amount || 0).toLocaleString()}（運費 ${o.shippingFee || 0}）</dd>
+          <dt>付款</dt><dd>${esc(o.gateway === 'paypal' ? 'PayPal ' + (o.paypalOrderId || '') : (o.paymentType || '綠界') + '　' + (o.ecpayTradeNo || ''))}<br><span class="muted">${esc(o.paymentDate || '')}</span></dd>
+          <dt>通知信</dt><dd class="muted">買家 ${esc(o.mail && o.mail.buyer || '-')}・賣家 ${esc(o.mail && o.mail.seller || '-')}${o.shipMail ? '・出貨信 ' + esc(o.shipMail) : ''}</dd>
+          ${o.note ? `<dt>備註</dt><dd>${esc(o.note)}</dd>` : ''}
+        </dl>
+        <div style="margin-top:14px"><a class="btn ghost" style="padding:10px 16px;font-size:11px" target="_blank" href="${API}/api/mail-preview/${esc(o.no)}">看通知信</a></div>
+      </div>
+      <div>
+        <h3>${o.status === 'shipped' ? '出貨資訊（已出貨）' : '標記出貨'}</h3>
+        ${canShip ? `
+        <div class="field"><label>物流</label>
+          <select id="carrier-${esc(no)}">
+            <option ${o.carrier === '7-11 交貨便' ? 'selected' : ''}>7-11 交貨便</option>
+            <option ${o.carrier === '全家 店到店' ? 'selected' : ''}>全家 店到店</option>
+            <option ${o.carrier === '綠界物流（超商）' ? 'selected' : ''}>綠界物流（超商）</option>
+            <option ${o.carrier === '黑貓宅急便' ? 'selected' : ''}>黑貓宅急便</option>
+            <option ${o.carrier === '郵局' ? 'selected' : ''}>郵局</option>
+            <option ${o.carrier === '其他' ? 'selected' : ''}>其他</option>
+          </select></div>
+        <div class="field"><label>物流單號／寄件代碼</label><input id="tracking-${esc(no)}" value="${esc(o.tracking || '')}" placeholder="例：寄件代碼或託運單號"></div>
+        <div class="field"><label>給買家的備註（選填）</label><textarea id="shipnote-${esc(no)}">${esc(o.shipNote || '')}</textarea></div>
+        <button class="btn" onclick="event.stopPropagation();ship('${esc(no)}')">${o.status === 'shipped' ? '更新出貨資訊並重寄通知' : '標記已出貨並寄信'}</button>
+        <div id="msg-${esc(no)}"></div>` : `<p class="muted">此訂單狀態為「${ST[o.status] || o.status}」，尚未付款不能出貨。</p>`}
+        <h3 style="margin-top:22px">內部備註</h3>
+        <div class="field"><textarea id="note-${esc(no)}" placeholder="只有後台看得到">${esc(o.note || '')}</textarea></div>
+        <button class="btn ghost" onclick="event.stopPropagation();note('${esc(no)}')">儲存備註</button>
+        ${o.status !== 'cancelled' && o.status !== 'shipped' ? `<button class="btn ghost" style="margin-left:8px" onclick="event.stopPropagation();cancelOrder('${esc(no)}')">取消訂單</button>` : ''}
+      </div>`;
+    box.addEventListener('click', e => e.stopPropagation());
+  }
+  async function post(no, action, body){
+    const r = await fetch(API + '/api/admin/orders/' + encodeURIComponent(no) + '/' + action, { method: 'POST', headers: H(), body: JSON.stringify(body) });
+    const j = await r.json(); if (!r.ok) throw new Error(j.error || r.status); return j;
+  }
+  async function ship(no){
+    const msg = document.getElementById('msg-' + no); msg.className = 'muted'; msg.textContent = '處理中…';
+    try {
+      const j = await post(no, 'ship', { carrier: document.getElementById('carrier-' + no).value, tracking: document.getElementById('tracking-' + no).value.trim(), shipNote: document.getElementById('shipnote-' + no).value.trim() });
+      DETAIL[no] = j.order; const m = ORDERS.find(o => o.no === no); if (m) { m.status = 'shipped'; m.shippedAt = j.order.shippedAt; }
+      msg.className = 'ok'; msg.textContent = '已標記出貨' + (j.order.shipMail === 'sent' ? '，出貨通知已寄給買家' : '（出貨信：' + (j.order.shipMail || '未寄，買家沒留 Email') + '）');
+      render();
+    } catch (e) { msg.className = 'bad'; msg.textContent = '失敗：' + e.message; }
+  }
+  async function note(no){ try { const j = await post(no, 'note', { note: document.getElementById('note-' + no).value }); DETAIL[no] = j.order; render(); } catch (e) { alert('失敗：' + e.message); } }
+  async function cancelOrder(no){ if (!confirm('確定取消訂單 ' + no + '？（不會自動退款，退款請到綠界或 PayPal 後台操作）')) return; try { const j = await post(no, 'cancel', { reason: '後台取消' }); DETAIL[no] = j.order; const m = ORDERS.find(o => o.no === no); if (m) m.status = 'cancelled'; render(); } catch (e) { alert('失敗：' + e.message); } }
+  function cp(t){ navigator.clipboard && navigator.clipboard.writeText(t); }
+
+  if (TOKEN) { show(); load(); }
+</script>
+</body>
+</html>
