@@ -150,6 +150,7 @@
     const ship = o.shipping === 'home' ? '宅配：' + (o.address || '') : '超商取貨：' + (o.storeBrand === 'FAMI' ? '全家' : '7-11') + ' ' + (o.store || '');
     const items = (o.items || []).map(i => `${esc(i.name)} × ${i.qty}　NT$ ${Number(i.price * i.qty).toLocaleString()}`).join('<br>');
     const canShip = o.status === 'paid' || o.status === 'shipped';
+    const autoCarrier = o.carrier || (o.shipping === 'home' ? '黑貓宅急便' : (o.storeBrand === 'FAMI' ? '全家 店到店' : '7-11 交貨便'));
     box.innerHTML = `
       <div>
         <h3>訂單明細</h3>
@@ -169,16 +170,12 @@
       <div>
         <h3>${o.status === 'shipped' ? '出貨資訊（已出貨）' : '標記出貨'}</h3>
         ${canShip ? `
-        <div class="field"><label>物流</label>
-          <select id="carrier-${esc(no)}">
-            <option ${o.carrier === '7-11 交貨便' ? 'selected' : ''}>7-11 交貨便</option>
-            <option ${o.carrier === '全家 店到店' ? 'selected' : ''}>全家 店到店</option>
-            <option ${o.carrier === '綠界物流（超商）' ? 'selected' : ''}>綠界物流（超商）</option>
-            <option ${o.carrier === '黑貓宅急便' ? 'selected' : ''}>黑貓宅急便</option>
-            <option ${o.carrier === '郵局' ? 'selected' : ''}>郵局</option>
-            <option ${o.carrier === '其他' ? 'selected' : ''}>其他</option>
+        <div class="field"><label>物流（依買家選的配送方式）</label>
+          <div id="carrierText-${esc(no)}" style="padding:10px 0;font-size:14px">${esc(autoCarrier)}<button class="copy" onclick="event.stopPropagation();document.getElementById('carrierSel-${esc(no)}').style.display='';this.style.display='none'">改用其他物流</button></div>
+          <select id="carrierSel-${esc(no)}" style="display:none">
+            ${['7-11 交貨便','全家 店到店','綠界物流（超商）','黑貓宅急便','郵局','其他'].map(c => `<option ${c === autoCarrier ? 'selected' : ''}>${c}</option>`).join('')}
           </select></div>
-        <div class="field"><label>物流單號／寄件代碼</label><input id="tracking-${esc(no)}" value="${esc(o.tracking || '')}" placeholder="例：寄件代碼或託運單號"></div>
+        <div class="field"><label>物流單號／寄件代碼</label><input id="tracking-${esc(no)}" value="${esc(o.tracking || '')}" placeholder="${o.shipping === 'home' ? '黑貓託運單號' : '交貨便／店到店的寄件代碼'}"></div>
         <div class="field"><label>給買家的備註（選填）</label><textarea id="shipnote-${esc(no)}">${esc(o.shipNote || '')}</textarea></div>
         <button class="btn" onclick="event.stopPropagation();ship('${esc(no)}')">${o.status === 'shipped' ? '更新出貨資訊並重寄通知' : '標記已出貨並寄信'}</button>
         <div id="msg-${esc(no)}"></div>` : `<p class="muted">此訂單狀態為「${ST[o.status] || o.status}」，尚未付款不能出貨。</p>`}
@@ -196,7 +193,7 @@
   async function ship(no){
     const msg = document.getElementById('msg-' + no); msg.className = 'muted'; msg.textContent = '處理中…';
     try {
-      const j = await post(no, 'ship', { carrier: document.getElementById('carrier-' + no).value, tracking: document.getElementById('tracking-' + no).value.trim(), shipNote: document.getElementById('shipnote-' + no).value.trim() });
+      const j = await post(no, 'ship', { carrier: (function(){ const sel = document.getElementById('carrierSel-' + no); return sel.style.display === 'none' ? document.getElementById('carrierText-' + no).firstChild.textContent.trim() : sel.value; })(), tracking: document.getElementById('tracking-' + no).value.trim(), shipNote: document.getElementById('shipnote-' + no).value.trim() });
       DETAIL[no] = j.order; const m = ORDERS.find(o => o.no === no); if (m) { m.status = 'shipped'; m.shippedAt = j.order.shippedAt; }
       msg.className = 'ok'; msg.textContent = '已標記出貨' + (j.order.shipMail === 'sent' ? '，出貨通知已寄給買家' : '（出貨信：' + (j.order.shipMail || '未寄，買家沒留 Email') + '）');
       render();
