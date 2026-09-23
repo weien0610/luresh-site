@@ -285,6 +285,12 @@ footer{background:#fff;border-top:1px solid var(--line);padding:56px 0 24px}
   .copy-line{margin-top:26px}
 }
 
+/* ===== floating LINE button ===== */
+.line-fab{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;align-items:center;gap:10px;background:#06C755;color:#fff;padding:12px 18px 12px 14px;border-radius:999px;box-shadow:0 12px 28px -10px rgba(6,199,85,.7);font-size:13px;letter-spacing:.14em;font-weight:500;transition:transform .3s,box-shadow .3s}
+.line-fab:hover{transform:translateY(-3px);box-shadow:0 18px 32px -12px rgba(6,199,85,.8)}
+.line-fab svg{width:24px;height:24px;fill:#fff;flex:none}
+@media(max-width:600px){.line-fab{padding:12px;right:16px}.line-fab span{display:none}}
+
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
