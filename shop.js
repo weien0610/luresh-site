@@ -11,9 +11,9 @@ const PRODUCTS = [
     gallery: ['images/hero-product.jpg', 'images/lifestyle-bed.jpg', 'images/ingredients-banner.jpg', 'images/poster-ingredients.jpg'],
     tagline: '擺脫囤積感！每日喝出輕盈順暢力',
     desc: '專為外食族、忙碌上班族設計的輕體代謝飲品。結合多重纖維、強效酵素與阻斷澱粉、燃燒代謝專利萃取。每日 2 包，幫你輕鬆找回順暢快感與青春活力。',
-    perks: ['低卡負擔，每份僅 34.4 大卡', '蛋奶素可食・專利專屬配方', '台灣製造，通過多項 SGS 認證', '第一次購買免費附搖搖杯'],
+    perks: ['低卡負擔，每份僅 34.4 大卡', '蛋奶素可食・專利專屬配方', '台灣製造，通過多項 SGS 認證', '第一次購買附露蕾希專用杯子'],
     unit: '入', perDay: 2,
-    addon: { productId: 'cup', label: '附搖搖杯（第一次購買請勾選，免費；第二次購買可不勾）' },
+    addon: { productId: 'cup', label: '我已經有露蕾希專用杯子，這次不需要（第一次購買必須附杯，沖泡專用）' },
     variants: [
       { id: 'box1',  name: '一盒',   desc: '30 入 · 15 天份', price: 1680,  was: null,  tag: null,   boxes: 1 },
       { id: 'box2',  name: '兩盒',   desc: '60 入 · 30 天份', price: 3250,  was: 3360,  tag: '熱銷', boxes: 2 },
@@ -58,11 +58,11 @@ const PRODUCTS = [
     ],
   },
   {
-    // 免費贈品：搖搖杯（不出現在商品列表，由高纖莓果飲商品頁勾選加入）
-    id: 'cup', hidden: true, name: '露蕾希搖搖杯', en: 'Shaker Cup', eyebrow: 'Free gift',
+    // 專用杯子（不出現在商品列表；第一次購買高纖莓果飲必附，之後可不要）
+    id: 'cup', hidden: true, name: '露蕾希專用杯子', en: 'Shaker Cup', eyebrow: 'For first order',
     image: 'images/poster-howto.jpg', gallery: ['images/poster-howto.jpg'],
-    tagline: '', desc: '首購免費附贈的搖搖杯，沖泡高纖莓果飲使用。', perks: [], unit: '個', perDay: 0,
-    variants: [{ id: 'one', name: '搖搖杯', desc: '首購免費附贈', price: 0, was: null, tag: null }],
+    tagline: '', desc: '沖泡高纖莓果飲專用的杯子，第一次購買必須附杯。', perks: [], unit: '個', perDay: 0,
+    variants: [{ id: 'one', name: '專用杯子', desc: '第一次購買附贈', price: 0, was: null, tag: null }],
     sections: [],
   },
 ];

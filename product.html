@@ -103,11 +103,11 @@
       <div><h5>GUIDE</h5><ul><li><a href="guide.html#steps">沖泡四步驟</a></li><li><a href="guide.html#rules">食用說明</a></li><li><a href="guide.html#travel">飛行須知</a></li></ul></div>
       <div><h5>FOLLOW</h5><ul><li><a href="https://www.facebook.com/Baspretty/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://line.me/R/ti/p/@450rawje" target="_blank" rel="noopener">LINE 官方帳號</a></li></ul></div>
     </div>
-    <div class="copy-line"><span>© 2026 LURESH 露蕾希</span><span>台灣製造 · 通過多項 SGS 認證</span></div>
+    <div class="copy-line"><span>© 2023 LURESH 露蕾希</span><span>台灣製造 · 通過多項 SGS 認證</span></div>
   </div>
 </footer>
 
-<script src="shop.js?v=20260921b"></script>
+<script src="shop.js?v=20260923b"></script>
 <script>
   const q = new URLSearchParams(location.search);
   const P = findProduct(q.get('p')) || PRODUCTS[0];
@@ -148,12 +148,12 @@
   function choose(id){ current = id; renderVariants(); }
   function bump(d){ const el = document.getElementById('qty'); el.value = Math.max(1, (parseInt(el.value) || 1) + d); }
   document.getElementById('notice').textContent = P.id === 'hfbd' ? '※ 價格與 7-11 賣貨便官方賣場同步' : '※ 茶品說明待補';
-  if (P.addon) document.getElementById('addon').innerHTML = `<label class="agree" style="margin-top:18px"><input type="checkbox" id="addonChk" checked><span>${P.addon.label}</span></label>`;
+  if (P.addon) document.getElementById('addon').innerHTML = `<label class="agree" style="margin-top:18px"><input type="checkbox" id="addonChk"><span>${P.addon.label}</span></label>`;
   function add(buyNow){
     const qty = Math.max(1, parseInt(document.getElementById('qty').value) || 1);
     addToCart(P.id, current, qty);
     const chk = document.getElementById('addonChk');
-    if (P.addon && chk && chk.checked && !getCart().some(r => r.productId === P.addon.productId)) addToCart(P.addon.productId, findProduct(P.addon.productId).variants[0].id, 1);
+    if (P.addon && !(chk && chk.checked) && !getCart().some(r => r.productId === P.addon.productId)) addToCart(P.addon.productId, findProduct(P.addon.productId).variants[0].id, 1);
     location.href = buyNow ? 'checkout.html' : 'cart.html';
   }
   renderVariants();
