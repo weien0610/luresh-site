@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260923a">
-<link rel="stylesheet" href="shop.css?v=20260921b">
+<link rel="stylesheet" href="styles.css?v=20260929a">
+<link rel="stylesheet" href="shop.css?v=20260929a">
 </head>
 <body>
 
@@ -81,7 +81,7 @@
           <label class="choice"><input type="radio" name="payment" value="paypal"><div><b>PayPal</b><span>海外顧客適用，以美金結帳</span></div><i class="pp">PayPal</i></label>
         </div>
         <div id="paypal-zone"><div id="paypal-buttons"></div></div>
-        <label class="agree"><input type="checkbox" id="agree" required><span>我已閱讀並同意購物條款與隱私權政策。食品類商品拆封後恕不退換。</span></label>
+        <label class="agree"><input type="checkbox" id="agree" required><span>我已閱讀並同意<a href="terms.html" target="_blank" style="color:var(--rose);border-bottom:1px solid var(--rose)">購物條款</a>、<a href="privacy.html" target="_blank" style="color:var(--rose);border-bottom:1px solid var(--rose)">隱私權政策</a>與<a href="returns.html" target="_blank" style="color:var(--rose);border-bottom:1px solid var(--rose)">退換貨政策</a>。</span></label>
         <div class="err" id="err"></div>
       </section>
     </div>
@@ -105,13 +105,14 @@
       <div class="fbrand"><a class="logo" href="index.html"><div class="en">LURESH</div><div class="zh">露蕾希</div></a><p>高纖莓果飲 High Fiber Berry Drink。特選專利植萃 × 多重膳食纖維，每日 2 包，喝出輕盈順暢力。</p></div>
       <div><h5>SHOP</h5><ul><li><a href="shop.html">商城</a></li><li><a href="cart.html">購物車</a></li><li><a href="order.html">訂單查詢</a></li></ul></div>
       <div><h5>GUIDE</h5><ul><li><a href="guide.html#steps">沖泡四步驟</a></li><li><a href="guide.html#rules">食用說明</a></li><li><a href="guide.html#travel">飛行須知</a></li></ul></div>
+      <div><h5>POLICY</h5><ul><li><a href="terms.html">購物條款</a></li><li><a href="privacy.html">隱私權政策</a></li><li><a href="returns.html">退換貨政策</a></li></ul></div>
       <div><h5>FOLLOW</h5><ul><li><a href="https://www.facebook.com/Baspretty/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://line.me/R/ti/p/@450rawje" target="_blank" rel="noopener">LINE 官方帳號</a></li></ul></div>
     </div>
     <div class="copy-line"><span>© 2023 LURESH 露蕾希</span><span>台灣製造 · 通過多項 SGS 認證</span></div>
   </div>
 </footer>
 
-<script src="shop.js?v=20260923c"></script>
+<script src="shop.js?v=20260929a"></script>
 <script>
   const form = document.getElementById('co');
   const lines = cartLines();
@@ -135,6 +136,12 @@
     document.getElementById('payBtn').style.display = pp ? 'none' : '';
     document.querySelectorAll('.choice').forEach(c => c.classList.toggle('on', c.querySelector('input').checked));
   }
+  // 自動帶入上次結帳資料（只存在這個瀏覽器）
+  try {
+    const last = JSON.parse(localStorage.getItem('luresh_customer') || 'null');
+    if (last) { for (const k of ['name','phone','email','store','storeBrand','address']) if (last[k] && form[k]) form[k].value = last[k]; if (last.shipping) form.shipping.value = last.shipping; }
+  } catch (e) {}
+  function rememberCustomer(){ try { localStorage.setItem('luresh_customer', JSON.stringify({ name: form.name.value.trim(), phone: form.phone.value.trim(), email: form.email.value.trim(), shipping: shipping(), store: form.store.value.trim(), storeBrand: form.storeBrand.value, address: form.address.value.trim() })); } catch (e) {} }
   form.addEventListener('change', render);
   render();
 
@@ -168,6 +175,7 @@
     for (const [k, v] of Object.entries(p)) { const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = typeof v === 'object' ? JSON.stringify(v) : v; f.appendChild(i); }
     document.body.appendChild(f);
     localStorage.setItem('luresh_last_order', JSON.stringify(p));
+    rememberCustomer();
     f.submit();
   });
 
@@ -184,7 +192,7 @@
       onClick: (data, actions) => validate() ? actions.resolve() : actions.reject(),
       createOrder: (data, actions) => actions.order.create({ purchase_units: [{ description: 'LURESH order', amount: { currency_code: cur, value: ppAmount() } }] }),
       onApprove: async (data, actions) => {
-        const p = orderPayload();
+        const p = orderPayload(); rememberCustomer();
         const err = document.getElementById('err'); err.classList.remove('on');
         try {
           let j;

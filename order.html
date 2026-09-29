@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260923a">
-<link rel="stylesheet" href="shop.css?v=20260921b">
+<link rel="stylesheet" href="styles.css?v=20260929a">
+<link rel="stylesheet" href="shop.css?v=20260929a">
 </head>
 <body>
 
@@ -47,9 +47,18 @@
   <div class="status">
     <div class="panel">
       <div id="lookup" style="display:none">
-        <h2>查詢訂單</h2>
+        <h2>查詢我的訂單</h2>
+        <p style="font-size:13px;color:var(--ink-soft);margin-bottom:14px">輸入下單時填的 Email 與手機，列出您的所有訂單。</p>
+        <div class="fgrid2">
+          <div class="field"><label for="lkEmail">Email</label><input id="lkEmail" type="email" autocomplete="email"></div>
+          <div class="field"><label for="lkPhone">手機</label><input id="lkPhone" inputmode="tel" autocomplete="tel"></div>
+        </div>
+        <button class="btn" style="margin-top:14px;cursor:pointer" onclick="lookup()">查詢</button>
+        <div id="lkMsg" style="font-size:13px;color:var(--ink-soft);margin-top:10px"></div>
+        <div id="lkList" style="margin-top:18px"></div>
+        <h2 style="margin-top:34px">用訂單編號查</h2>
         <div class="fgrid2"><div class="field full"><label for="no">訂單編號</label><input id="no" placeholder="例：LRMU6R98WZ9W2E"></div></div>
-        <button class="btn" style="margin-top:14px" onclick="go()">查詢</button>
+        <button class="btn ghost" style="margin-top:14px;cursor:pointer" onclick="go()">查詢</button>
       </div>
       <div id="view" style="display:none">
         <span class="badge pending" id="badge">查詢中…</span>
@@ -68,18 +77,37 @@
       <div class="fbrand"><a class="logo" href="index.html"><div class="en">LURESH</div><div class="zh">露蕾希</div></a><p>高纖莓果飲 High Fiber Berry Drink。特選專利植萃 × 多重膳食纖維，每日 2 包，喝出輕盈順暢力。</p></div>
       <div><h5>SHOP</h5><ul><li><a href="shop.html">商城</a></li><li><a href="cart.html">購物車</a></li><li><a href="order.html">訂單查詢</a></li></ul></div>
       <div><h5>GUIDE</h5><ul><li><a href="guide.html#steps">沖泡四步驟</a></li><li><a href="guide.html#rules">食用說明</a></li><li><a href="guide.html#travel">飛行須知</a></li></ul></div>
+      <div><h5>POLICY</h5><ul><li><a href="terms.html">購物條款</a></li><li><a href="privacy.html">隱私權政策</a></li><li><a href="returns.html">退換貨政策</a></li></ul></div>
       <div><h5>FOLLOW</h5><ul><li><a href="https://www.facebook.com/Baspretty/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://line.me/R/ti/p/@450rawje" target="_blank" rel="noopener">LINE 官方帳號</a></li></ul></div>
     </div>
     <div class="copy-line"><span>© 2023 LURESH 露蕾希</span><span>台灣製造 · 通過多項 SGS 認證</span></div>
   </div>
 </footer>
 
-<script src="shop.js?v=20260923c"></script>
+<script src="shop.js?v=20260929a"></script>
 <script>
   const no = new URLSearchParams(location.search).get('order');
   if (!no) document.getElementById('lookup').style.display = '';
   else { document.getElementById('view').style.display = ''; show(no); }
   function go(){ const v = document.getElementById('no').value.trim(); if (v) location.href = 'order.html?order=' + encodeURIComponent(v); }
+  try { const last = JSON.parse(localStorage.getItem('luresh_customer') || 'null'); if (last) { if (last.email) document.getElementById('lkEmail').value = last.email; if (last.phone) document.getElementById('lkPhone').value = last.phone; } } catch (e) {}
+  const ST = { pending: '待付款', paid: '已付款・準備出貨', shipped: '已出貨', failed: '付款失敗', cancelled: '已取消' };
+  async function lookup(){
+    const email = document.getElementById('lkEmail').value.trim(), phone = document.getElementById('lkPhone').value.trim();
+    const msg = document.getElementById('lkMsg'), list = document.getElementById('lkList'); list.innerHTML = '';
+    if (!email || !phone) { msg.textContent = '請填 Email 與手機。'; return; }
+    msg.textContent = '查詢中…';
+    try {
+      const r = await fetch(LURESH_API + '/api/orders/lookup?email=' + encodeURIComponent(email) + '&phone=' + encodeURIComponent(phone));
+      const j = await r.json();
+      if (!r.ok) { msg.textContent = j.error || '查詢失敗'; return; }
+      if (!j.orders.length) { msg.textContent = '找不到符合的訂單，請確認 Email 與手機是否與下單時相同。'; return; }
+      msg.textContent = '共 ' + j.orders.length + ' 筆';
+      list.innerHTML = j.orders.map(o => `<a href="order.html?order=${encodeURIComponent(o.no)}" style="display:grid;grid-template-columns:1fr auto;gap:6px 14px;border:1px solid var(--line);padding:14px 16px;margin-bottom:10px;align-items:center">
+        <div><div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--ink-soft)">${o.no}</div><div style="font-size:14px">${o.items || ''}</div><div style="font-size:12px;color:var(--ink-soft)">${String(o.createdAt || '').replace('T',' ').slice(0,16)}</div></div>
+        <div style="text-align:right"><span class="badge ${o.status === 'shipped' ? 'paid' : o.status === 'cancelled' ? 'failed' : o.status}" style="font-size:11px;padding:3px 10px">${ST[o.status] || o.status}</span><div style="font-family:var(--serif);font-size:18px;margin-top:6px">NT$ ${Number(o.amount || 0).toLocaleString()}</div></div></a>`).join('');
+    } catch (e) { msg.textContent = '連線失敗，請稍後再試。'; }
+  }
 
   const LABEL = { paid: ['付款成功', '我們已收到您的付款，將於 1–2 個工作天內出貨。'], shipped: ['已出貨', '您的商品已寄出。超商取貨請留意簡訊通知，宅配預計 1–2 個工作天送達。'], cancelled: ['訂單已取消', '此訂單已取消，若有疑問請與我們聯繫。'], failed: ['付款未完成', '付款未成功，請回購物車重新結帳，或改用其他付款方式。'], pending: ['等待付款結果', 'ATM 或超商代碼請於期限內完成繳費；信用卡若剛付完，狀態會在幾秒內更新。'] };
   async function show(no){
