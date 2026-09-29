@@ -171,26 +171,42 @@
     f.submit();
   });
 
-  // PayPal（Sandbox 通用商店，USD；正式上線換客戶的 Client ID）
-  const USD_RATE = 32; // 示意匯率，正式上線由客戶決定定價方式
-  const s = document.createElement('script');
-  s.src = 'https://www.paypal.com/sdk/js?client-id=sb&currency=USD&intent=capture';
-  s.onload = () => paypal.Buttons({
-    style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal' },
-    onClick: (data, actions) => validate() ? actions.resolve() : actions.reject(),
-    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ description: 'LURESH order', amount: { currency_code: 'USD', value: (totals().total / USD_RATE).toFixed(2) } }] }),
-    onApprove: async (data, actions) => {
-      const d = await actions.order.capture();
-      const cap = d.purchase_units?.[0]?.payments?.captures?.[0];
-      const p = orderPayload();
-      const r = await fetch(LURESH_API + '/api/paypal/record', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderID: d.id, status: d.status, amount: cap?.amount?.value, currency: cap?.amount?.currency_code, payer: d.payer?.email_address, order: p }) });
-      const j = await r.json();
-      saveCart([]);
-      location.href = 'order.html?order=' + encodeURIComponent(j.no);
-    },
-  }).render('#paypal-buttons');
-  document.head.appendChild(s);
+  // PayPal：設定（Client ID、幣別、匯率）由 API 提供；有設金鑰時走伺服器端扣款驗證
+  (async function initPayPal(){
+    let cfg = { paypalClientId: 'sb', paypalCurrency: 'USD', paypalRate: 32, serverCapture: false };
+    try { cfg = { ...cfg, ...(await (await fetch(LURESH_API + '/api/config')).json()) }; } catch (e) {}
+    const cur = cfg.paypalCurrency;
+    const ppAmount = () => cur === 'TWD' ? String(Math.round(totals().total)) : (totals().total / Number(cfg.paypalRate || 32)).toFixed(2);
+    const s = document.createElement('script');
+    s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(cfg.paypalClientId) + '&currency=' + cur + '&intent=capture';
+    s.onload = () => paypal.Buttons({
+      style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal' },
+      onClick: (data, actions) => validate() ? actions.resolve() : actions.reject(),
+      createOrder: (data, actions) => actions.order.create({ purchase_units: [{ description: 'LURESH order', amount: { currency_code: cur, value: ppAmount() } }] }),
+      onApprove: async (data, actions) => {
+        const p = orderPayload();
+        const err = document.getElementById('err'); err.classList.remove('on');
+        try {
+          let j;
+          if (cfg.serverCapture) {
+            const r = await fetch(LURESH_API + '/api/paypal/capture', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ orderID: data.orderID, expectedAmount: ppAmount(), order: p }) });
+            j = await r.json(); if (!r.ok) throw new Error(j.error || r.status);
+          } else {
+            const d = await actions.order.capture();
+            const cap = d.purchase_units?.[0]?.payments?.captures?.[0];
+            const r = await fetch(LURESH_API + '/api/paypal/record', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ orderID: d.id, status: d.status, amount: cap?.amount?.value, currency: cap?.amount?.currency_code, payer: d.payer?.email_address, order: p }) });
+            j = await r.json(); if (!r.ok) throw new Error(j.error || r.status);
+          }
+          saveCart([]);
+          location.href = 'order.html?order=' + encodeURIComponent(j.no);
+        } catch (e) { err.textContent = 'PayPal 付款處理失敗：' + e.message + '，請聯繫我們並提供 PayPal 交易編號 ' + data.orderID; err.classList.add('on'); }
+      },
+      onError: (e) => { const err = document.getElementById('err'); err.textContent = 'PayPal 發生錯誤，請改用其他付款方式。'; err.classList.add('on'); },
+    }).render('#paypal-buttons');
+    document.head.appendChild(s);
+  })();
 </script>
 <a class="line-fab" href="https://line.me/R/ti/p/@450rawje" target="_blank" rel="noopener" aria-label="加入露蕾希 LINE 官方帳號"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 5.6 2 10.1c0 4 3.6 7.4 8.4 8 .3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.6 1.1-.5 5.8-3.4 7.9-5.8C21.6 13.7 22 12 22 10.1 22 5.6 17.5 2 12 2zM8.1 12.7H6.2c-.3 0-.5-.2-.5-.5V8.6c0-.3.2-.5.5-.5s.5.2.5.5v3.1h1.4c.3 0 .5.2.5.5s-.2.5-.5.5zm1.9-.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5V8.6c0-.3.2-.5.5-.5s.5.2.5.5v3.6zm4.4 0c0 .2-.1.4-.3.5h-.2c-.2 0-.3-.1-.4-.2l-1.9-2.6v2.3c0 .3-.2.5-.5.5s-.5-.2-.5-.5V8.6c0-.2.1-.4.3-.5h.2c.2 0 .3.1.4.2l1.9 2.6V8.6c0-.3.2-.5.5-.5s.5.2.5.5v3.6zm3.1-2.3c.3 0 .5.2.5.5s-.2.5-.5.5h-1.4v.9h1.4c.3 0 .5.2.5.5s-.2.5-.5.5h-1.9c-.3 0-.5-.2-.5-.5V8.6c0-.3.2-.5.5-.5h1.9c.3 0 .5.2.5.5s-.2.5-.5.5h-1.4v.8h1.4z"/></svg><span>LINE 諮詢</span></a>
 </body>
